@@ -1,0 +1,176 @@
+\documentclass[12pt, letterpaper]{article}
+
+% Packages
+\usepackage[margin=1in]{geometry} % For setting page margins
+\usepackage{amsmath, amssymb} % For math symbols and equations
+\usepackage{graphicx} % For including images
+\usepackage{hyperref} % For hyperlinks
+
+\renewcommand{\thesection}{\arabic{section}.}
+
+\begin{document}
+
+\title{
+    \begin{tabular}{@{}l@{}}
+        \textbf{Class:} Robust Multivariate Control \\
+        \textbf{Professor:} Dr. Sean Humbert \\
+        \textbf{TAs:}  \\
+        \textbf{Student:} Steve Gillet \\
+        \textbf{Date:} \today \\
+        \textbf{Assignment:} Homework 1
+    \end{tabular}
+}
+
+\author{}
+\date{}
+
+\maketitle
+
+\section{Analytically compute the 2-norms of the following time domain signals on the specified in-
+terval, if they exist.}
+
+The equation for the 2-norm of a continuous function over an interval is:
+
+$\|f\|_2 = \sqrt{\int_a^b |f(t)|^2 \, dt}$
+
+
+\subsection*{(a) f(t) = $e^{-3t}, [0, \infty)$}
+
+\[ f(t) = e^{-3t}, \quad t \in [0, \infty) \]
+
+\[ \|f\|_2 = \sqrt{\int_{0}^{\infty} e^{-6t} \, dt} \]
+
+\[ \|f\|_2 = \sqrt{\left[ -\frac{1}{6} e^{-6t} \right]_{0}^{\infty}} \]
+
+\[ \|f\|_2 = \sqrt{0 + \frac{1}{6}} \]
+
+\[ \|f\|_2 = \sqrt{\frac{1}{6}} \]
+
+
+\subsection*{(b) f(t) = sin t, [0, $\infty$)}
+
+\[ f(t) = \sin(t), \quad t \in [0, \infty) \]
+
+\[ \|f\|_2 = \sqrt{\int_{0}^{\infty} \sin^2(t) \, dt} \]
+
+\[ \|f\|_2 = \sqrt{\left[\frac{t}{2} - \frac{1}{4} \sin{2t} \right]_{0}^{\infty}} \]
+
+sin($\infty$) does not converge so the 2-norm does not exist.
+
+\subsection*{(c) f(t) = $\begin{bmatrix} e^{-t} \\ 1 \end{bmatrix}$, [0, T]}
+
+\[ f(t) = \begin{bmatrix} e^{-t} \\ 1 \end{bmatrix} \]
+
+\[ \|f\|_2 = \begin{bmatrix} \sqrt{\int_0^T e^{-2t} dt} \\ \sqrt{\int_0^T 1 dt} \end{bmatrix} \]
+
+\[ \|f\|_2 = \begin{bmatrix} \sqrt{\left[ -\frac{1}{2}e^{-2t} \right]_{0}^{T}} \\ \sqrt{\left[ T \right]_{0}^{T}} \end{bmatrix} \]
+
+\[ \|f\|_2 = \begin{bmatrix} \sqrt{-\frac{1}{2}e^{-2t}  - \frac{1}{2}} \\ \sqrt{T} \end{bmatrix} \]
+
+\[ \|f\|_2 = \sqrt{\frac{1}{2} - \frac{1}{2} e^{-2T} + T} \]
+
+
+\section{Analytically compute the 2-norms of the following frequency domain signals, if they exist.
+(Hint: Parseval’s identity)}
+
+Parseval's identity:
+
+\[\|\hat{f}\|_2 = \sqrt{\frac{1}{2\pi} \int_{-\infty}^\infty \left| \hat{f}(j\omega) \right|^2 \, d\omega} \]
+
+\subsection*{(a) $\hat{f}(j\omega) = \frac{1}{j\omega + a}, \quad a > 0$}
+
+\[ \quad \hat{f}(j\omega) = \frac{1}{j\omega + a}, \quad a > 0 \]
+
+\[\|\hat{f}(j\omega)\|_2 = \sqrt{\frac{1}{2\pi} \int_{-\infty}^\infty \left| \frac{1}{j\omega + a} \right|^2 \, d\omega} \]
+
+\[= \sqrt{\frac{1}{2\pi} \int_{-\infty}^\infty \frac{1}{\omega^2 + a^2} \, d\omega} \]
+
+\[= \frac{1}{\sqrt{2\pi}} \left[ \frac{1}{a} \arctan\left(\frac{\omega}{a}\right) \right]_{-\infty}^\infty \]
+
+\[= \frac{1}{\sqrt{2\pi}} \left( \frac{\pi}{a} \right) \]
+
+\[= \sqrt{\frac{1}{2a}}\]
+
+\subsection*{(b) $\hat{f}(s) = \frac{1}{(s + a)^2}, \quad a > 0$}
+
+\[hat{f}(s) = \frac{1}{(s + a)^2}, \quad a > 0\]
+
+\[
+\|\hat{f}(j\omega)\|_2 = \sqrt{\frac{1}{2\pi} \int_{-\infty}^\infty \left| \frac{1}{(j\omega + a)^2} \right|^2 \, d\omega}
+\]
+
+\[
+= \sqrt{\frac{1}{2\pi} \int_{-\infty}^\infty \frac{1}{(\omega^2 + a^2)^2} \, d\omega}
+\]
+
+\[
+= \frac{1}{\sqrt{2\pi}} \left[ \frac{\pi}{2a^3} \right]
+\]
+
+\[
+= \sqrt{\frac{1}{4a^3}}
+\]
+
+\subsection*{(c) $\hat{f}(s) = 
+\begin{bmatrix}
+\frac{1}{s + a} \\
+\frac{1}{s + b}
+\end{bmatrix}, \quad a > 0, \, b > 0$}
+
+\[\hat{f}(s) = 
+\begin{bmatrix}
+\frac{1}{s + a} \\
+\frac{1}{s + b}
+\end{bmatrix}\]
+
+\[
+\|\hat{f}(j\omega)\|_2^2 = \frac{1}{2\pi} \int_{-\infty}^\infty \left( \left| \frac{1}{j\omega + a} \right|^2 + \left| \frac{1}{j\omega + b} \right|^2 \right) \, d\omega
+\]
+
+\[
+= \frac{1}{2\pi} \int_{-\infty}^\infty \left( \frac{1}{\omega^2 + a^2} + \frac{1}{\omega^2 + b^2} \right) \, d\omega
+\]
+
+\[
+= \frac{1}{2\pi} \left( \frac{\pi}{a} + \frac{\pi}{b} \right)
+\]
+
+\[
+= \frac{1}{2a} + \frac{1}{2b}
+\]
+
+\section{If a scalar frequency domain signal $\hat{g}(s)$ is stable and strictly proper, its corresponding signal $g(t)$ in the time domain can be bounded by an exponential of the form $c e^{-a t}$, $a > 0$ for all $t \geq 0$. Use this fact to show that its 1-norm in the time domain
+\[
+\|g\|_1 = \int_{-\infty}^\infty |g(t)| \, dt
+\]
+is bounded, i.e., $\|g\|_1 < \infty$}
+
+\[
+\|g\|_1 = \int_0^\infty |g(t)| \, dt
+\]
+
+\[
+\leq \int_0^\infty c e^{-a t} \, dt
+\]
+
+\[
+= \left[ -\frac{c}{a} e^{-a t} \right]_0^\infty
+\]
+
+\[
+= 0 + \frac{c}{a}
+\]
+
+\[
+= \frac{c}{a}
+\]
+
+\[
+\frac{c}{a} \text{ is finite for any positive } c \text{ and } a.
+\]
+
+\[
+\therefore \|g\|_1 < \infty, \text{ and } g \text{ can be bounded.}
+\]
+
+\end{document}
