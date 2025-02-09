@@ -1,7 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1739052492.74081 "/home/steve0gillet/Desktop/rmc/hw2/gilletSteveHW2.tex" "gilletSteveHW2.pdf" "gilletSteveHW2" 1739052493.40598 0
+["pdflatex"] 1739077756.97515 "/home/steve0gillet/Desktop/rmc/hw2/gilletSteveHW2.tex" "gilletSteveHW2.pdf" "gilletSteveHW2" 1739077757.5844 0
   "/etc/texmf/web2c/texmf.cnf" 1730151749.91005 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/steve0gillet/Desktop/rmc/hw2/gilletSteveHW2.tex" 1739052492.53526 6592 305e71c943ee281c6fbbc5d4d3d8a85b ""
+  "/home/steve0gillet/Desktop/rmc/hw2/gilletSteveHW2.tex" 1739077756.78885 6592 498b774ed14fac2c6b1fb4c59aa93808 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1246382020 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
@@ -90,9 +90,9 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1730151778.56547 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1730151847 8213962 77fbdab6dff16db976ab03fe1fbc58d0 ""
-  "gilletSteveHW2.aux" 1739052493.34125 1083 ba29814f5a0067fa2b25a306a1b8927e "pdflatex"
-  "gilletSteveHW2.out" 1739052493.34125 3018 8483852c0fae764666e89fe73d0dd51f "pdflatex"
-  "gilletSteveHW2.tex" 1739052492.53526 6592 305e71c943ee281c6fbbc5d4d3d8a85b ""
+  "gilletSteveHW2.aux" 1739077757.51685 1083 ba29814f5a0067fa2b25a306a1b8927e "pdflatex"
+  "gilletSteveHW2.out" 1739077757.51685 3018 8483852c0fae764666e89fe73d0dd51f "pdflatex"
+  "gilletSteveHW2.tex" 1739077756.78885 6592 498b774ed14fac2c6b1fb4c59aa93808 ""
   (generated)
   "gilletSteveHW2.aux"
   "gilletSteveHW2.log"
