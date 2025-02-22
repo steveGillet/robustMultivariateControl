@@ -1,6 +1,7 @@
-A = [-1.5 1 0.1; -4 -1 0; 0 1 0];
 % A = [0 1; -1 -2];
+A = [-1.5 1 0.1; -4 -1 0; 0 1 0];
 nStates = size(A, 1);
+disp("Eigenvalues: ");
 disp(eig(A));
 
 setlmis([])
