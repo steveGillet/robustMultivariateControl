@@ -25,7 +25,7 @@ setlmis([])
 
 X = lmivar(1, [nStates 1]);
 W = lmivar(2, [nInputs nStates]);
-gamma = 0.5;
+gamma = 2.5;
 
 lmiterm([-1 1 1 X],1,1);
 lmiterm([2 1 1 X],A,1,'s');

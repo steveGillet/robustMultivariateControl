@@ -17,7 +17,7 @@ setlmis([])
 X = lmivar(1, [nStates 1]);
 W = lmivar(2, [nInputs nStates]);
 Z = lmivar(1, [nStates 1]);
-gamma = 5;
+gamma = 4;
 
 lmiterm([-1 1 1 X],1,1);
 
@@ -38,3 +38,29 @@ h2lmi = getlmis;
 [tmin, xfeas] = feasp(h2lmi);
 X = dec2mat(h2lmi,xfeas,X);
 W = dec2mat(h2lmi,xfeas,W);
+Z = dec2mat(h2lmi,xfeas,Z);
+
+K = W/X;
+
+h2sys = ss(A+B2*K,B1,C1,D11);
+
+[z, tOut, x] = impulse(h2sys);
+
+u = K*x';
+
+disp("u1 L2 Norm: ")
+disp(norm(u(1,:),2));
+
+evalsys = evallmi(h2lmi,xfeas);
+[lhs,rhs] = showlmi(evalsys,4);
+
+disp('Left Hand Side');
+disp(lhs);
+disp('Right Hand Side');
+disp(rhs);
+
+disp('Trace Z');
+disp(trace(Z));
+
+disp('Z');
+disp(Z);
