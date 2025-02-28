@@ -252,15 +252,131 @@ In this problem, you will implement the $H_2$ LMI synthesis approach and design 
 Implement the $H_2$ LMI conditions derived in lecture for the feasibility problem given a prescribed attenuation level $\|G(s)\|_2 < \gamma$ as a function using the LMI Toolbox in MATLAB. Design $\gamma$ for the $H_2$ controller to match the control energy ($L_2$ norm) for an equivalent $H_\infty$ controller with attenuation level $\gamma = 2.5$.
 }
 
+I first put the system into the previous Matlab code for the $H_{\infty}$ controller using attenuation level 2.5 and got 6.8823 for the control signal L2 norm (0.1416 $H_{\infty}$ Norm).
+Then I created the following $H_2$ synthesis in Matlab to generate the $H_2$ controller and get the control energy for that.
+
+\begin{lstlisting}[style=matlabstyle]
+A = [-0.0869 0 0.039 -1 ; % x1 = delta beta (rad)
+     -4.424 -1.184 0 0.335; % x2 = delta p (rad/s)
+      0 1 0 0 ; % x3 = delta phi (rad)
+      2.148 -0.021 0 -0.228]; % x4 = delta r (rad/s)
+B1 = [0 0 0 0.288]'; % w = r_g (yaw rate gust, rad/s)
+B2 = [0.0223 0.547 0 -1.169]'; % u1 = delta_r
+C1 = eye(4); % C = I
+D11 = zeros(4,1);
+D12 = [0 0 0 0]';
+
+nStates = size(A, 1);
+nInputs = size(B2, 2);
+nOutputs = size(C1, 1);
+
+setlmis([])
+
+X = lmivar(1, [nStates 1]);
+W = lmivar(2, [nInputs nStates]);
+Z = lmivar(1, [nStates 1]);
+gamma = 1.14;
+
+lmiterm([-1 1 1 X],1,1);
+
+lmiterm([2 1 1 X],A,1,'s');
+lmiterm([2 1 1 W],B2,1,'s');
+lmiterm([2 1 1 0],B1*B1');
+
+lmiterm([3 1 1 Z],-1,1); 
+lmiterm([3 1 2 X],C1,1);
+lmiterm([3 1 2 W],D12,1);
+lmiterm([3 2 2 X],-1,1);
+
+lmiterm([4 1 1 Z],[1 0 0 0], [1 0 0 0]');
+lmiterm([4 1 1 Z],[0 1 0 0], [0 1 0 0]');
+lmiterm([4 1 1 Z],[0 0 1 0], [0 0 1 0]');
+lmiterm([4 1 1 Z],[0 0 0 1], [0 0 0 1]');
+lmiterm([-4 1 1 0],gamma);
+
+h2lmi = getlmis;
+
+[tmin, xfeas] = feasp(h2lmi);
+X = dec2mat(h2lmi,xfeas,X);
+W = dec2mat(h2lmi,xfeas,W);
+Z = dec2mat(h2lmi,xfeas,Z);
+
+K = W/X;
+
+h2sys = ss(A+B2*K,B1,C1,D11);
+
+[z, tOut, x] = impulse(h2sys);
+
+u = K*x';
+
+disp("u1 L2 Norm: ")
+disp(norm(u(1,:),2));    
+\end{lstlisting}
+
+I then played with the gamma level starting at 2.5 and going up and down until the L2 norm energy was about the same as it was for $H_{\infty}$ which ended up having an attenuation level of 1.14 with a resulting 6.8938 control energy and 0.1644 $H_2$ norm.
+
 \subsection{}
 \textit{
 Generate the resulting singular value bode plots of the closed loop systems and the responses of the state $x$ due to an impulse in the yaw disturbance $r_g$ for both the $H_2$ and $H_\infty$ controllers and compare both sets of plots.
 }
 
+I took that x impulse function output at plotted the different state responses.
+
+\begin{lstlisting}[style=matlabstyle]
+[z, tOut, x] = impulse(h2sys);
+
+subplot(1,4,1);
+plot(tOut, x(:,1), 'LineWidth', 1.5, 'Color', [255/255 127/255 102/255]);
+grid on;
+title('x1 Response to Impulse w');
+xlabel('Time [s]');
+ylabel('x1 Magnitude');    
+\end{lstlisting}
+
+And then used the same sigma function and plotting as from before and the results follow.
+
+For $H_{\infty}$:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics{hinfXResponseImpulse.png}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics{sigmaHinf.png}
+\end{figure}
+
+And for $H_2$:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics{h2xResponseImpulse.png}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics{sigmaH2.png}
+\end{figure}
+
+You can see the max singular values are a bit higher for the $H_2$ which makes sense given the explicit purpose of $H_{\infty}$ is to minimize that value.
+It also seems that the state responses are a sharper I would say for $H_{\infty}$, they seem to happen faster.
+
 \subsection{}
 \textit{
 For a white noise yaw disturbance $r_g$ of unit intensity, compute the average power in the states for each of the closed loop systems and compare.
 }
+
+I used the 'lyap' function to derive the covariance matrix for each system using $B_1B_1'$ for unity intensity white noise and the trace of P to get the energy.
+
+\begin{lstlisting}
+disp("Average Power in States: ");
+Ph2 = lyap(A+B2*K, B1 * B1');
+averagePower = trace(Ph2);
+disp(averagePower);    
+\end{lstlisting}
+
+The result for $H_2$ was 0.0270 and the result for $H_{\infty}$ was 0.0224 which is close but does seem to verify the earlier observation about the state change.
 
 \section{$H_\infty$ Observer Design}
 \textit{
@@ -291,7 +407,64 @@ Show that for $e(t) = x(t) - \hat{x}(t)$ and $\tilde{z}(t) = z(t) - \hat{z}(t)$,
 \tilde{z} = C_1e
 \]
 and has closed loop transfer function $G_{\tilde{z}w} = C_1[sI - (A + LC_2)]^{-1}(B_1 + LD_{21})$ from $w \rightarrow \tilde{z}$.
-}
+} \\
+
+Substitute \( y = C_2x + D_{21}w \) into the observer equation:
+\[
+\dot{\hat{x}} = A\hat{x} + B_2u + L(C_2\hat{x} + D_{21}w - C_2x - D_{21}w) = A\hat{x} + B_2u + L(C_2\hat{x} - C_2x).
+\]
+Since \( D_{21} = 0 \) (as specified), this simplifies to:
+\[
+\dot{\hat{x}} = A\hat{x} + B_2u + LC_2(\hat{x} - x).
+\]
+The error dynamics are:
+\[
+\dot{e} = \dot{x} - \dot{\hat{x}}.
+\]
+Substitute \( \dot{x} = Ax + B_2u + B_1w \) and the observer equation:
+\[
+\dot{e} = (Ax + B_2u + B_1w) - (A\hat{x} + B_2u + LC_2(\hat{x} - x)).
+\]
+\[
+\dot{e} = Ax + B_1w - A\hat{x} - LC_2(\hat{x} - x).
+\]
+\[
+\dot{e} = A(x - \hat{x}) + B_1w - LC_2(x - \hat{x}).
+\]
+\[
+\dot{e} = (A - LC_2)e + B_1w.
+\]
+Given \( D_{21} = 0 \), the term \( LD_{21}w = 0 \), so:
+\[
+\dot{e} = (A + LC_2)e + B_1w.
+\]
+
+\subsubsection*{Regulated Output Error \( \tilde{z} \)}
+\[
+z = C_1x, \quad \hat{z} = C_1\hat{x}.
+\]
+\[
+\tilde{z} = z - \hat{z} = C_1x - C_1\hat{x} = C_1(x - \hat{x}) = C_1e.
+\]
+Thus, \( \tilde{z} = C_1e \).
+
+\subsubsection*{Closed-Loop Transfer Function \( G_{\tilde{z}w} \)}
+The error dynamics in the Laplace domain (with zero initial conditions) are:
+\[
+sE(s) = (A + LC_2)E(s) + B_1W(s).
+\]
+\[
+E(s) = [sI - (A + LC_2)]^{-1}B_1W(s).
+\]
+Then:
+\[
+\tilde{Z}(s) = C_1E(s) = C_1[sI - (A + LC_2)]^{-1}B_1W(s).
+\]
+Thus, the transfer function from \( w \) to \( \tilde{z} \) is:
+\[
+G_{\tilde{z}w}(s) = C_1[sI - (A + LC_2)]^{-1}B_1.
+\]
+With \( D_{21} = 0 \), this matches \( G_{\tilde{z}w} = C_1[sI - (A + LC_2)]^{-1}(B_1 + LD_{21}) \).
 
 \subsection{}
 \textit{
@@ -306,13 +479,136 @@ C_1 & 0 & -\gamma I
 holds. When such a pair of matrices $W$ and $P$ are found, the solution to the problem is given as $L = P^{-1}W$.
 }
 
+\subsection*{Proof}
+
+\subsubsection*{Problem Statement}
+We need to design \( L \) such that the \( H_\infty \) norm of the transfer function \( G_{\tilde{z}w}(s) = C_1[sI - (A + LC_2)]^{-1}(B_1 + LD_{21}) \) is less than \( \gamma \), i.e., \( ||G_{\tilde{z}w}||_\infty < \gamma \). This means the worst-case gain from disturbance \( w \) to estimation error output \( \tilde{z} \) is bounded by \( \gamma \).
+
+\subsubsection*{\( H_\infty \) Norm Condition}
+For the LTI system \( \dot{e} = (A + LC_2)e + (B_1 + LD_{21})w \), \( \tilde{z} = C_1e \), the \( H_\infty \) norm condition \( ||G_{\tilde{z}w}||_\infty < \gamma \) is equivalent to the existence of a positive definite matrix \( P > 0 \) satisfying the Bounded Real Lemma:
+\[
+(A + LC_2)^T P + P(A + LC_2) + C_1^T C_1 + \frac{1}{\gamma^2} P(B_1 + LD_{21})(B_1 + LD_{21})^T P < 0.
+\]
+This ensures stability and the \( H_\infty \) performance bound.
+
+\subsubsection*{LMI Formulation}
+To solve for \( L \), we use the given LMI constraint:
+\[
+\begin{pmatrix}
+A^T P + PA + C_1^T C_1 + WC_2 + C_2^T W^T & PB_1 + WD_{21} & C_1^T \\
+(B_1^T P + D_{21}^T W^T) & -\gamma I & 0 \\
+C_1 & 0 & -\gamma I
+\end{pmatrix} < 0,
+\]
+where \( W = PL \) (since \( L = P^{-1}W \)), and \( P > 0 \) is positive definite. This LMI ensures that the closed-loop system \( A + LC_2 \) is stable and \( ||G_{\tilde{z}w}||_\infty < \gamma \).
+
+\subsubsection*{Sufficiency}
+If there exist \( P > 0 \) and \( W \) satisfying the LMI, then \( L = P^{-1}W \) ensures the closed-loop matrix \( A + LC_2 \) is Hurwitz (stable) and the \( H_\infty \) norm condition holds. Substituting \( W = PL \) into the LMI reduces it to the standard \( H_\infty \) performance condition for the error system, proving that \( ||G_{\tilde{z}w}||_\infty < \gamma \).
+
+\subsubsection*{Necessity}
+If \( ||G_{\tilde{z}w}||_\infty < \gamma \) for some \( L \), then there exists a \( P > 0 \) satisfying the Bounded Real Lemma for the error system. By defining \( W = PL \), the LMI must hold, as it is a reformulation of the \( H_\infty \) condition in terms of \( P \) and \( W \). Thus, the LMI is both necessary and sufficient for the existence of \( L \) satisfying the \( H_\infty \) bound.
+
+\subsubsection*{Solution}
+When \( P > 0 \) and \( W \) are found by solving the LMI (e.g., using MATLAB’s LMI Toolbox), the observer gain is:
+\[
+L = P^{-1}W.
+\]
+This \( L \) ensures the observer achieves the desired \( H_\infty \) performance.
+
+
 \subsection{}
 \textit{
 Design an $H_\infty$ observer according to the above approach such that $\|G_{\tilde{z}w}\|_\infty < 0.1$ for the system in Problem 1. Assume that
 \[
-C_2 = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix}, \quad D_{21} = \begin{pmatrix} 0 \\ 1 \end{pmatrix}.
+C_2 = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 0 & 1 \end{pmatrix}, \quad D_{21} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}.
 \]
 Provide plots of the error states $e_1(t)$, $e_2(t)$, and $e_3(t)$ for 2 seconds for an impulse input in $w$.
 }
+
+This is the code I used to generate the $H_{\infty}$ Observer system and to plot the impulse response.
+
+\begin{lstlisting}[style=matlabstyle]
+A = [-5  1  0;    % 3x3 matrix A
+        0  1  1;
+        1  1  1];
+
+B2 = [0  0;       % 3x2 matrix B2
+        0  1;
+        1  0];
+
+B1 = [0.5;         % 3x1 matrix B1
+        0;
+        0.3];
+
+C1 = [1  0  0;    % 2x3 matrix C1
+        0  2  1];
+
+C2 = [1 0 0;
+        0 0 1];
+
+D21 = [0; 0];
+
+nStates = size(A, 1);
+nInputs = size(B2, 2);
+nOutputs = size(C1, 1);
+
+setlmis([])
+
+P = lmivar(2, [nStates nStates]);
+W = lmivar(2, [nStates nInputs]);
+gamma = 0.1;
+
+lmiterm([-1 1 1 P],1,1);
+
+lmiterm([2 1 1 P],1,A,'s');
+lmiterm([2 1 1 W],1, C2, 's');
+lmiterm([2 1 2 P],1,B1);
+lmiterm([2 1 3 0],C1');
+lmiterm([2 2 2 0],-gamma);
+lmiterm([2 2 3 0],0);
+lmiterm([2 3 3 0],-gamma);
+
+lmiH2obs = getlmis;
+
+[tmin, xfeas] = feasp(lmiH2obs);
+P = dec2mat(lmiH2obs,xfeas,P);
+W = dec2mat(lmiH2obs,xfeas,W);
+
+L = inv(P)*W;
+
+hinfObsSys = ss(A+L*C2, B1, C1, 0);
+
+[z, tOut, x] = impulse(hinfObsSys);
+
+figure;
+
+subplot(1,3,1);
+plot(tOut, x(:,1), 'LineWidth', 1.5, 'Color', [255/255 127/255 102/255]);
+grid on;
+title('x1 Response to Impulse w');
+xlabel('Time [s]');
+ylabel('x1 Magnitude');
+
+subplot(1,3,2);
+plot(tOut, x(:,2), 'r-');
+grid on;
+title('x2 Response to Impulse w');
+xlabel('Time [s]');
+ylabel('x2 Magnitude');
+
+subplot(1,3,3);
+plot(tOut, x(:,3), 'y-');
+grid on;
+title('x3 Response to Impulse w');
+xlabel('Time [s]');
+ylabel('x3 Magnitude');
+\end{lstlisting}
+
+And below are the results:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics{obsPlot.png}
+\end{figure}
 
 \end{document}

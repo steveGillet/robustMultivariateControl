@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.10.28)  23 FEB 2025 00:26
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.10.28)  27 FEB 2025 16:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -465,24 +465,59 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 245.
 
-[6 <./uResponseHinf.png (PNG copy)>]
+[6 <./uResponseHinf.png (PNG copy)>] [7]
+<hinfXResponseImpulse.png, id=247, 429.10312pt x 338.76563pt>
+File: hinfXResponseImpulse.png Graphic file (type png)
+<use hinfXResponseImpulse.png>
+Package pdftex.def Info: hinfXResponseImpulse.png  used on input line 342.
+(pdftex.def)             Requested size: 429.10207pt x 338.76479pt.
+ [8]
+<sigmaHinf.png, id=266, 429.10312pt x 338.76563pt>
+File: sigmaHinf.png Graphic file (type png)
+<use sigmaHinf.png>
+Package pdftex.def Info: sigmaHinf.png  used on input line 347.
+(pdftex.def)             Requested size: 429.10207pt x 338.76479pt.
+ [9 <./hinfXResponseImpulse.png (PNG copy)>]
+<h2xResponseImpulse.png, id=272, 429.10312pt x 338.76563pt>
+File: h2xResponseImpulse.png Graphic file (type png)
+<use h2xResponseImpulse.png>
+Package pdftex.def Info: h2xResponseImpulse.png  used on input line 354.
+(pdftex.def)             Requested size: 429.10207pt x 338.76479pt.
+ [10 <./sigmaHinf.png (PNG copy)>]
+<sigmaH2.png, id=278, 429.10312pt x 338.76563pt>
+File: sigmaH2.png Graphic file (type png)
+<use sigmaH2.png>
+Package pdftex.def Info: sigmaH2.png  used on input line 359.
+(pdftex.def)             Requested size: 429.10207pt x 338.76479pt.
+ [11 <./h2xResponseImpulse.png (PNG copy)>]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 265.
+(hyperref)                removing `math shift' on input line 381.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `subscript' on input line 265.
+(hyperref)                removing `subscript' on input line 381.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `\infty' on input line 265.
+(hyperref)                removing `\infty' on input line 381.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 265.
+(hyperref)                removing `math shift' on input line 381.
 
-[7] [8] (./gilletSteveHW4.aux)
+[12{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc} <./sigmaH2.png (PNG copy)>]
+Underfull \hbox (badness 10000) in paragraph at lines 410--411
+
+ []
+
+[13] [14] [15] [16]
+<obsPlot.png, id=364, 429.10312pt x 338.76563pt>
+File: obsPlot.png Graphic file (type png)
+<use obsPlot.png>
+Package pdftex.def Info: obsPlot.png  used on input line 611.
+(pdftex.def)             Requested size: 429.10207pt x 338.76479pt.
+ [17] [18 <./obsPlot.png (PNG copy)>] (./gilletSteveHW4.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -491,18 +526,18 @@ Package rerunfilecheck Info: File `gilletSteveHW4.out' has not changed.
 (rerunfilecheck)             Checksum: 2E5712D154EF598470D896F9CC22C823;977.
  ) 
 Here is how much of TeX's memory you used:
- 14590 strings out of 474222
- 221429 string characters out of 5748732
- 2170975 words of memory out of 5000000
- 36584 multiletter control sequences out of 15000+600000
- 570178 words of font info for 84 fonts, out of 8000000 for 9000
+ 14817 strings out of 474222
+ 224869 string characters out of 5748732
+ 2315975 words of memory out of 5000000
+ 36640 multiletter control sequences out of 15000+600000
+ 570822 words of font info for 86 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,7n,79p,461b,2602s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on gilletSteveHW4.pdf (8 pages, 243585 bytes).
+ 75i,7n,79p,472b,2602s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmitt10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on gilletSteveHW4.pdf (18 pages, 369114 bytes).
 PDF statistics:
- 281 PDF objects out of 1000 (max. 8388607)
- 238 compressed objects within 3 object streams
- 113 named destinations out of 1000 (max. 500000)
- 125 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 528 PDF objects out of 1000 (max. 8388607)
+ 466 compressed objects within 5 object streams
+ 282 named destinations out of 1000 (max. 500000)
+ 150 words of extra memory for PDF output out of 10000 (max. 10000000)
 
