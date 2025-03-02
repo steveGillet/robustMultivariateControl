@@ -1,0 +1,184 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry} % For setting page margins
+\usepackage{amsmath}
+\usepackage{amssymb} % For math symbols and equations
+\usepackage{graphicx} % For including images
+\usepackage{hyperref} 
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{caption}
+
+\renewcommand{\thesection}{\arabic{section}.}
+\renewcommand{\thesubsection}{(\alph{subsection})}
+
+\lstdefinestyle{matlabstyle}{
+    language=Matlab,              % Specify the language
+    basicstyle=\ttfamily\footnotesize\color{black}, % Code font
+    keywordstyle=\color{blue}\bfseries, % Keywords in blue
+    stringstyle=\color{orange},    % Strings in green
+    commentstyle=\color{magenta}, % Comments in magenta
+    numbers=left,                 % Line numbers on the left
+    numberstyle=\tiny\color{black},% Line number style
+    stepnumber=1,                 % Line number increment
+    breaklines=true,              % Line breaking
+    frame=single,                 % Border around code
+    backgroundcolor=\color{white},
+    tabsize=4,                    % Tab size
+    showstringspaces=false,       % Don't show spaces in strings
+}
+
+\begin{document}
+
+\title{
+    \begin{tabular}{@{}l@{}}
+        \textbf{Class:} Robust Multivariate Control \\
+        \textbf{Professor:} Dr. Sean Humbert \\
+        \textbf{TAs:} Santosh Chaganti \\
+        \textbf{Student:} Steve Gillet \\
+        \textbf{Date:} \today \\
+        \textbf{Assignment:} Homework 5
+    \end{tabular}
+}
+
+\author{}
+\date{}
+
+\maketitle
+
+\section{}
+
+\textit{For the simple SISO negative feedback system with \(P(s) = \frac{1}{s-1}\) and \(C(s) = \frac{s-1}{s+2}\), show that at least one transfer function from exogenous signals \(r\) and \(d_I\) to the internal signals \(e\), \(u\) and \(y\) is unstable due to the right-half plane pole/zero cancellation of \(s - 1\) in the loop transfer function \(L = PC\).}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{p1ryDiagram.jpg}
+\end{figure}
+
+I will start with the transfer function from \(r\) to \(y\) which for this SISO unity feedback system is:
+\[
+\frac{PC}{1 + PC}
+\]
+
+Or:
+
+\[
+\frac{(\frac{1}{s-1})(\frac{s-1}{s+2})}{1 + (\frac{1}{s-1})(\frac{s-1}{s+2})} = \frac{\frac{1}{s+2}}{1+\frac{1}{s+2}} = \frac{\frac{1}{s+2}}{\frac{s+2}{s+2}+\frac{1}{s+2}} = \frac{\frac{1}{s+2}}{\frac{s+3}{s+2}} = \frac{1}{s+3}
+\]
+
+This transfer function is not only stable but it was made stable by the addition of the controller and the pole/zero cancellation. Let us see some other signals, eh.
+
+Full system diagram with $d_I$:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{p1diyDiagram.jpg}
+\end{figure}
+
+Let's try r$\to$u:
+
+Direct path: \(C\)
+Return path: \(1 + PC\)
+
+\[
+\frac{C}{1+PC}
+\]
+
+\[
+\frac{\frac{s-1}{s+2}}{1 + \frac{1}{s-1}\frac{s-1}{s+2}} =
+\]
+
+\[
+\frac{\frac{s-1}{s+2}}{1 + \frac{1}{s+2}} = \frac{\frac{s-1}{s+2}}{\frac{s+3}{s+2}} = \frac{s-1}{s+3}
+\]
+
+\[
+= \frac{s-1}{s+3}
+\]
+
+Again the pole is at -3 and the transfer function is stable.
+Let's try $d_I \rightarrow y$:
+
+\[
+\frac{P}{1 + CP}
+\]
+
+\[
+\frac{\frac{1}{s-1}}{\frac{s+3}{s+2}}
+\]
+
+\[
+= \frac{s+2}{(s-1)(s+3)}
+\]
+
+There we go, a pole at $s = 1$, the transfer function from $d_I$ to y is unstable.
+
+\section{}
+
+\textit{For the following longitudinal model for an F-4 Phantom with 4 perturbation states (pitch rate \(\Delta q\), forward speed \(\Delta u\), angle of attack \(\Delta \alpha\), pitch angle \(\Delta \theta\)), 2 inputs (elevator deflection \(\Delta \delta_e\), flaperon deflection \(\Delta \delta_f\)) and 2 outputs (\(\Delta q\) and \(\Delta \alpha\)). Note that the \(D\) matrix entries are zeros for this output selection.}
+
+\[
+A = \begin{pmatrix}
+-0.8 & -0.0006 & -12 & 0 \\
+0 & -0.014 & -16.64 & -32.2 \\
+1 & -0.0001 & -1.5 & 0 \\
+1 & 0 & 0 & 0
+\end{pmatrix}, \quad
+B = \begin{pmatrix}
+-19 & -2.5 \\
+-0.66 & -0.5 \\
+-0.16 & -0.6 \\
+0 & 0
+\end{pmatrix}.
+\]
+
+\subsection{}
+\textit{Generate a MATLAB plot that contains the singular value bode plots in red combined with the bode magnitude plots of the 4 individual transfer functions from the 2 inputs to 2 outputs. Does the maximum singular value plot envelope the individual transfer function plots?}
+
+I generated the system, transfer function, and plots using the 'ss', 'ss2tf', and 'bode' Matlab functions.
+You can see my implementation below:
+
+\begin{lstlisting}[style=matlabstyle]
+A = [ -0.8 -0.0006 -12 0; 0 -0.014 -16.64 -32.2; 1 -0.0001 -1.5 0; 1 0 0 0];
+B = [ -19 -2.5; -0.66 -0.5; -0.16 -0.6; 0 0];
+C = [1 0 0 0; 0 0 1 0];
+D = [0 0; 0 0];
+
+phantomSS = ss(A,B,C,D);
+[sv,wout] = sigma(phantomSS, {0,10});
+
+figure;
+plot(wout, sv, 'Color', [0.545, 0, 0]);
+grid on;
+title('Singular Value Bode Plot');
+xlabel('Frequency [rad/s]');
+ylabel('Absolute Gain [absolute units]');
+hold on;
+
+[num, den] = ss2tf(A,B,C,D,1);
+tf11 = tf(num(1,:), den);
+tf12 = tf(num(2,:), den);
+[num, den] = ss2tf(A,B,C,D,2);
+tf21 = tf(num(1,:), den);
+tf22 = tf(num(2,:), den);
+
+[mag11, phase11, wout11] = bode(tf11, {0,10});
+[mag12, phase12, wout12] = bode(tf12, {0,10});
+[mag21, phase21, wout21] = bode(tf21, {0,10});
+[mag22, phase22, wout22] = bode(tf22, {0,10});
+plot(wout11, squeeze(mag11), 'Color', [1,0.65,0]);
+plot(wout12, squeeze(mag12), 'Color', [1,0.65,0]);
+plot(wout21, squeeze(mag21), 'Color', [1,0.65,0]);
+plot(wout22, squeeze(mag22), 'Color', [1,0.65,0]);
+legend('System Singular Values', 'Individual Transfer Function Magnitudes');    
+\end{lstlisting}
+
+The plot is below and you can see that yes in fact thee maximum singular value plot (in red) envelopes the individual transfer functions (in orange):
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{singularValuePlot.png}
+\end{figure}
+
+\end{document}
