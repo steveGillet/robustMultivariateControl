@@ -181,4 +181,56 @@ The plot is below and you can see that yes in fact thee maximum singular value p
     \includegraphics[width=\textwidth]{singularValuePlot.png}
 \end{figure}
 
+\subsection{}
+
+\textit{From the plot in (a), estimate the worst case output 2-norm (in absolute units, not dB) for any $L_2[0, \infty)$ input signal with 2-norm equal to 1.}
+
+There's a peak near 0 rad/s at about 12.5 if we take this as the max singular value then that would indicate the highest possible amplification of the input so the worst case for the output 2-norm for an input with 2-norm of 1 would be 12.5.
+
+\subsection{}
+
+\textit{For the frequency $\omega=10$ rad/s, what input direction is amplified most? (the MATLAB command evalfr is useful here)}
+
+\begin{lstlisting}[style=matlabstyle]
+disp(evalfr(phantomSS, 1i*10));    
+\end{lstlisting}
+
+I used the 'evalfr' function with 10 rad/s as shown above and the result was:  
+
+\[
+\begin{bmatrix}    
+    -0.2559 + 2.1211i & -0.1085 + 0.2593i \\
+    0.2013 + 0.0718i & 0.0150 + 0.0731i
+\end{bmatrix}
+\]
+
+Indicating that the 1st input to the 1st output has the strongest response at 10 rad/s.
+    
+\section{}
+
+\textit{In this problem you will design a feedback control for the thrust vector actuator for the RL10-B2 liquid rocket engine which is on the second stage of the Delta IV launch vehicle. The gimbal actuator takes an input voltage \(v(t)\) and rotates the nozzle an angle \(\phi(t)\), whose dynamics are described by}
+
+\[
+P(s) = \frac{\phi(s)}{v(s)} = \frac{40(s + 1)}{(s^2 + s + 4)(s + 6)}
+\]
+
+\textit{The desired closed loop system should have decent tracking behavior so that it can follow the reference command from the rocket’s guidance system. The system has a closed loop bandwidth constraint due to the large inertia of the nozzle and the limits of the gimbal actuator to rotate it. Assume the following specifications for your initial controller design:
+\begin{itemize}
+    \item Maximum closed loop bandwidth of 2 Hz (12.56 rad/s)
+    \item Tracking error of less than 10\% from 0 to 0.5 Hz (3.14 rad/s)
+    \item Closed loop step response with a maximum overshoot of 20\%
+\end{itemize}
+}
+
+\subsection{}
+
+\textit{Convert the closed loop performance requirements above into open loop constraints. Design a dynamic compensator \(C(s)\) and generate a bode plot of \(L(s) = P(s)C(s)\) that includes all the constraints so that you can visually verify that your design meets all performance requirements.}
+
+For the maximum closed loop bandwidth of 12.56 rad/s we want the crossover point (the frequency where the open loop gain drops below 0dB) to be equal to the bandwidth frequency.
+For the tracking error we want the open loop gain to be greater than 2 or 6dB, this is derived from the tracking error being equal to the magnitude of the sensitivity function which is the reciprocol of the open loop function.
+For the overshoot we would like the phase margin to be 138.0213461 at the crossover point defined above, this is derived from the damping ratio formula $\zeta=(\frac{[ln(M_p)]^2}{\pi^2 + [ln(M_p)]^2})^{\frac{1}{2}}$ where $M_p$ is the max overshoot and the approximation that the phase margin is $100\cdot\zeta$ in degrees.
+
+The plan is to begin by plotting the plant bode plot and then using my knowledge of the effects of compensators to adjust the system to our needs.
+
+
 \end{document}

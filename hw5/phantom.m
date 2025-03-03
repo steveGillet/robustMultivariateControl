@@ -30,3 +30,5 @@ plot(wout12, squeeze(mag12), 'Color', [1,0.65,0]);
 plot(wout21, squeeze(mag21), 'Color', [1,0.65,0]);
 plot(wout22, squeeze(mag22), 'Color', [1,0.65,0]);
 legend('System Singular Values', '', 'Individual Transfer Function Magnitudes');
+
+disp(evalfr(phantomSS, 1i*10));
