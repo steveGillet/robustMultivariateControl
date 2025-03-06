@@ -1,7 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1741234762.20101 "/home/steve0gillet/Desktop/rmc/hw5/steveGilletHW5.tex" "steveGilletHW5.pdf" "steveGilletHW5" 1741234763.51761 0
+["pdflatex"] 1741283865.03755 "/home/steve0gillet/Desktop/rmc/hw5/steveGilletHW5.tex" "steveGilletHW5.pdf" "steveGilletHW5" 1741283867.11882 0
   "/etc/texmf/web2c/texmf.cnf" 1730151749.91005 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/steve0gillet/Desktop/rmc/hw5/steveGilletHW5.tex" 1741234760.76334 12480 8ab83f91bd555106b8991ea53896fac9 ""
+  "/home/steve0gillet/Desktop/rmc/hw5/steveGilletHW5.tex" 1741283864.45995 12487 19b19cfcc9db9d45096a4f8826226146 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -116,9 +116,9 @@
   "p1diyDiagram.jpg" 1740882390.14503 66356 032fe12132f70e4df559811c2fe05047 ""
   "p1ryDiagram.jpg" 1740882329.22647 46257 33634acbbb8ebdc1169e42cb221ed2af ""
   "singularValuePlot.png" 1740890009.62184 21093 2154dacf8560cab4af24521671f935fe ""
-  "steveGilletHW5.aux" 1741234763.44535 1208 2bea1ae3b066995603aa66791827347d "pdflatex"
-  "steveGilletHW5.out" 1741234763.44635 449 2b5d6894026e6841a0db770e7759b370 "pdflatex"
-  "steveGilletHW5.tex" 1741234760.76334 12480 8ab83f91bd555106b8991ea53896fac9 ""
+  "steveGilletHW5.aux" 1741283867.02197 1208 2bea1ae3b066995603aa66791827347d "pdflatex"
+  "steveGilletHW5.out" 1741283867.02297 449 2b5d6894026e6841a0db770e7759b370 "pdflatex"
+  "steveGilletHW5.tex" 1741283864.45995 12487 19b19cfcc9db9d45096a4f8826226146 ""
   (generated)
   "steveGilletHW5.aux"
   "steveGilletHW5.log"

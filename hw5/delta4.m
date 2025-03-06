@@ -79,3 +79,6 @@ legend('r', 'y')
 xlabel('Time [s]');
 ylabel('Amplitude [rad]');
 
+PS = plant/openLoop;
+norm(PS, inf);
+bode(PS);
