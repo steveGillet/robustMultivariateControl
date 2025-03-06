@@ -1,7 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1740978776.45688 "/home/steve0gillet/Desktop/rmc/hw5/steveGilletHW5.tex" "steveGilletHW5.pdf" "steveGilletHW5" 1740978777.34524 0
+["pdflatex"] 1741234762.20101 "/home/steve0gillet/Desktop/rmc/hw5/steveGilletHW5.tex" "steveGilletHW5.pdf" "steveGilletHW5" 1741234763.51761 0
   "/etc/texmf/web2c/texmf.cnf" 1730151749.91005 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/steve0gillet/Desktop/rmc/hw5/steveGilletHW5.tex" 1740978776.26046 8910 c5c2ccde2f0b4221035dce6eb9a7d976 ""
+  "/home/steve0gillet/Desktop/rmc/hw5/steveGilletHW5.tex" 1741234760.76334 12480 8ab83f91bd555106b8991ea53896fac9 ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -108,12 +108,17 @@
   "/usr/share/texmf/web2c/texmf.cnf" 1707919699 40399 f2c302f7d2af602abb742093540a5834 ""
   "/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map" 1730151778.56547 5472669 54eaf61a88b6b7896ebd0dac973cb29c ""
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1730151847 8213962 77fbdab6dff16db976ab03fe1fbc58d0 ""
+  "d4clRY.png" 1741233581.88525 18309 065ecad2d21e2048ae8f2edeab874100 ""
+  "d4clSinError.png" 1741233548.63324 15938 c546de813ffb18b83c97cd15d060dd5a ""
+  "d4clStep.png" 1741232747.89119 13712 30bbf87a015d523aedb1949c09dff630 ""
+  "delta4leadLagPlot.png" 1741230346.5952 43179 7f05900dbd29c453de2d824478d90d2d ""
+  "delta4openPlot.png" 1741230393.78338 16234 7e60588e8ee954066962da59bbafe0c9 ""
   "p1diyDiagram.jpg" 1740882390.14503 66356 032fe12132f70e4df559811c2fe05047 ""
   "p1ryDiagram.jpg" 1740882329.22647 46257 33634acbbb8ebdc1169e42cb221ed2af ""
   "singularValuePlot.png" 1740890009.62184 21093 2154dacf8560cab4af24521671f935fe ""
-  "steveGilletHW5.aux" 1740978777.24245 884 b3d36bdb40f822b6e6172e560b66d0fd "pdflatex"
-  "steveGilletHW5.out" 1740978777.24345 301 0aa8a5dbfb35edbe92a53206ba6800b8 "pdflatex"
-  "steveGilletHW5.tex" 1740978776.26046 8910 c5c2ccde2f0b4221035dce6eb9a7d976 ""
+  "steveGilletHW5.aux" 1741234763.44535 1208 2bea1ae3b066995603aa66791827347d "pdflatex"
+  "steveGilletHW5.out" 1741234763.44635 449 2b5d6894026e6841a0db770e7759b370 "pdflatex"
+  "steveGilletHW5.tex" 1741234760.76334 12480 8ab83f91bd555106b8991ea53896fac9 ""
   (generated)
   "steveGilletHW5.aux"
   "steveGilletHW5.log"

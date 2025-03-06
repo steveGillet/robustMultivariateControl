@@ -31,4 +31,14 @@ plot(wout21, squeeze(mag21), 'Color', [1,0.65,0]);
 plot(wout22, squeeze(mag22), 'Color', [1,0.65,0]);
 legend('System Singular Values', '', 'Individual Transfer Function Magnitudes');
 
-disp(evalfr(phantomSS, 1i*10));
+phantomFreq = evalfr(phantomSS, 1i*10);
+[U,S,V] = svd(phantomFreq);
+disp('Input to Output Frequency SVD U: ');
+disp(U);
+disp('Input to Output Frequency SVD S: ');
+disp(S);
+disp('Input to Output Frequency SVD V: ');
+disp(V);
+
+disp('Most Amplified Input Direction: ');
+disp(V(1,:));

@@ -192,19 +192,14 @@ There's a peak near 0 rad/s at about 12.5 if we take this as the max singular va
 \textit{For the frequency $\omega=10$ rad/s, what input direction is amplified most? (the MATLAB command evalfr is useful here)}
 
 \begin{lstlisting}[style=matlabstyle]
-disp(evalfr(phantomSS, 1i*10));    
+phantomFreq = evalfr(phantomSS, 1i*10);
+[U,S,V] = svd(phantomFreq);
+
+disp('Most Amplified Input Direction: ');
+disp(V(1,:));
 \end{lstlisting}
 
-I used the 'evalfr' function with 10 rad/s as shown above and the result was:  
-
-\[
-\begin{bmatrix}    
-    -0.2559 + 2.1211i & -0.1085 + 0.2593i \\
-    0.2013 + 0.0718i & 0.0150 + 0.0731i
-\end{bmatrix}
-\]
-
-Indicating that the 1st input to the 1st output has the strongest response at 10 rad/s.
+I used the 'evalfr' function with 10 rad/s as shown above and then put that resulting frequency matrix through the 'svd' function and got $\begin{bmatrix}0.9913 \\ 0.1317\end{bmatrix}$ for the vector corresponding to the greatest singular value.
     
 \section{}
 
@@ -228,9 +223,72 @@ P(s) = \frac{\phi(s)}{v(s)} = \frac{40(s + 1)}{(s^2 + s + 4)(s + 6)}
 
 For the maximum closed loop bandwidth of 12.56 rad/s we want the crossover point (the frequency where the open loop gain drops below 0dB) to be equal to the bandwidth frequency.
 For the tracking error we want the open loop gain to be greater than 2 or 6dB, this is derived from the tracking error being equal to the magnitude of the sensitivity function which is the reciprocol of the open loop function.
-For the overshoot we would like the phase margin to be 138.0213461 at the crossover point defined above, this is derived from the damping ratio formula $\zeta=(\frac{[ln(M_p)]^2}{\pi^2 + [ln(M_p)]^2})^{\frac{1}{2}}$ where $M_p$ is the max overshoot and the approximation that the phase margin is $100\cdot\zeta$ in degrees.
+For the overshoot we would like the phase margin to be 45.59 at the crossover point defined above, this is derived from the damping ratio formula $\zeta=(\frac{[ln(M_p)]^2}{\pi^2 + [ln(M_p)]^2})^{\frac{1}{2}}$ where $M_p$ is the max overshoot and the approximation that the phase margin is $100\cdot\zeta$ in degrees.
 
 The plan is to begin by plotting the plant bode plot and then using my knowledge of the effects of compensators to adjust the system to our needs.
+So I plotted the bode plot for the open loop transfer function and then looked at what and where needed to be modified.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.75\textwidth]{delta4openPlot.png}
+\end{figure}
+
+I immediately noticed that the low frequency gain is negative and thought of the lag compensator to add gain specifically in those low frequencies.
+Below is how I implemented it in Matlab, my thought was to keep alpha high to to start near/at zero and then at about the peak of the open loop to even it off again since I do want it to decline at some point and then I raised the whole curve by increasing k.
+
+\begin{lstlisting}[style=matlabstyle]
+k = 100;
+alpha = 10000;
+tau = 0.25;
+numC1 = [k*tau k*1];
+denC1 = [alpha*tau 1];
+C1 = tf(numC1, denC1);    
+\end{lstlisting}
+
+Then I had to deal with the phase margin and so I introduced a lead compensator using a similar strategy except adjust alpha and tau to increase the phase around the area of the gain crossover.
+The resulting lead/lag controller open loop bode plot is below:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{delta4leadLagPlot.png}
+\end{figure}
+
+I marked the tracking error specification in green and the other two in red so you can see how I met the specs.
+
+\subsection{}
+
+\textit{Generate a closed loop step response and error signal $e(t)$ for a reference input of $r = \sin(2\pi\omega t)$ for $\omega = 0.5$ Hz to show that the specs have been met.}
+
+I generated the responses using 'step' and 'lsim' as well as generating the closed loop system using 'feedback'.
+The results are below:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{d4clStep.png}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{d4clSinError.png}
+\end{figure}
+
+And I plotted the sine input and response to show some extra perspective:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{d4clRY.png}
+\end{figure}
+
+I think these pretty adequately show the max overshoot as you can see in the first plot that the response doesn't jump over 1.2 and in the second plot the error largely stays under 0.1. \\
+
+\textit{After initial flight testing, it is determined that there are disturbances that effect the behavior of the system. Specifically, vibrations from the engine (high frequency) and fuel slosh (low frequency) were shown to have a significant impact. You are now to redesign your controller assuming that disturbances can arise from a large frequency range. Assume disturbances $d(t)$ that enter the loop at the plant input can be any signal with finite energy $d(t) \in L_2[0, \infty)$, and redesign your controller to minimize the effect on the output $\phi(t)$, which is also assumed to be a finite energy signal:}
+    
+\textit{- Maximum $||\phi||_2/||d||_2$ gain should be less than 1/3 (3X reduction)}
+
+\subsection{}
+\textit{Re-generate the open loop bode plot of $L(s) = P(s)C(s)$ with your new compensator that includes all the constraints so that you can visually verify that your design meets all the original performance requirements listed in the first part of the question.}
+
+\subsection{}
+\textit{Generate a plot of the magnitude of the transfer function $PS(s)$ in absolute units to estimate the maximum $||\phi||_2/||d||_2$ gain and verify that you also satisfy this requirement (you can check this with the norm($PS$, inf)). along with a step and impulse response of $PS(s)$ to visualize the effect of the disturbance on your system.}
 
 \end{document}
