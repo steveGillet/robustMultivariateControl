@@ -4,14 +4,14 @@ plant = tf(num, den);
 
 bode(plant);
 
-k = 100;
+k = 125;
 alpha = 10000;
 tau = 0.25;
 numC1 = [k*tau k*1];
 denC1 = [alpha*tau 1];
 C1 = tf(numC1, denC1);
 
-k = 100;
+k = 125;
 alpha = 0.1;
 tau = 0.5;
 numC2 = [k*tau k];
@@ -79,6 +79,33 @@ legend('r', 'y')
 xlabel('Time [s]');
 ylabel('Amplitude [rad]');
 
-PS = plant/openLoop;
-norm(PS, inf);
-bode(PS);
+S = feedback(1,openLoop);
+PS = plant*S;
+disp(norm(PS, inf));
+w = logspace(-1,3,1000);
+[mag, ~] = bode(PS,w);
+mag =squeeze(mag);
+figure;
+semilogx(w,mag,'Color', [255/255 140/255 105/255]);
+hold on;
+plot(w, 1/3*ones(size(w)), 'Color', [204/255 51/255 51/255]);
+grid on;
+title('Magnitude of PS at K = 125 [Absolute Units]');
+xlabel('Frequency [rad/s]');
+ylabel('Magnitude [abs]');
+legend('PS', 'Max Gain 1/3');
+hold off;
+
+figure;
+impulse(PS);
+grid on;
+title('Disturbance Impulse Response');
+xlabel('Time [s]');
+ylabel('Output \phi(t) [rad]');
+
+figure;
+step(PS);
+grid on;
+title('Disturbance Step Response');
+xlabel('Time [s]');
+ylabel('Output \phi(t) [rad]');

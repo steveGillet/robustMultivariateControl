@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.10.28)  6 MAR 2025 10:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.10.28)  6 MAR 2025 16:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -463,7 +463,36 @@ Underfull \hbox (badness 10000) in paragraph at lines 282--283
 
  []
 
-[10 <./d4clRY.png (PNG copy)>] [11] (./steveGilletHW5.aux)
+[10 <./d4clRY.png (PNG copy)>]
+<psk100.png, id=169, 429.10312pt x 338.76563pt>
+File: psk100.png Graphic file (type png)
+<use psk100.png>
+Package pdftex.def Info: psk100.png  used on input line 317.
+(pdftex.def)             Requested size: 469.75502pt x 370.86514pt.
+<k125bode.png, id=170, 429.10312pt x 338.76563pt>
+File: k125bode.png Graphic file (type png)
+<use k125bode.png>
+Package pdftex.def Info: k125bode.png  used on input line 325.
+(pdftex.def)             Requested size: 469.75502pt x 370.86514pt.
+ [11 <./psk100.png (PNG copy)>]
+<psk125.png, id=187, 429.10312pt x 338.76563pt>
+File: psk125.png Graphic file (type png)
+<use psk125.png>
+Package pdftex.def Info: psk125.png  used on input line 336.
+(pdftex.def)             Requested size: 469.75502pt x 370.86514pt.
+ [12 <./k125bode.png (PNG copy)>]
+<step125.png, id=193, 429.10312pt x 338.76563pt>
+File: step125.png Graphic file (type png)
+<use step125.png>
+Package pdftex.def Info: step125.png  used on input line 343.
+(pdftex.def)             Requested size: 469.75502pt x 370.86514pt.
+ [13 <./psk125.png (PNG copy)>]
+<impulse125.png, id=200, 429.10312pt x 338.76563pt>
+File: impulse125.png Graphic file (type png)
+<use impulse125.png>
+Package pdftex.def Info: impulse125.png  used on input line 348.
+(pdftex.def)             Requested size: 469.75502pt x 370.86514pt.
+ [14 <./step125.png (PNG copy)>] [15 <./impulse125.png (PNG copy)>] (./steveGilletHW5.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -472,18 +501,18 @@ Package rerunfilecheck Info: File `steveGilletHW5.out' has not changed.
 (rerunfilecheck)             Checksum: 2B5D6894026E6841A0DB770E7759B370;449.
  ) 
 Here is how much of TeX's memory you used:
- 14586 strings out of 474222
- 221526 string characters out of 5748732
+ 14657 strings out of 474222
+ 222621 string characters out of 5748732
  2229975 words of memory out of 5000000
- 36614 multiletter control sequences out of 15000+600000
+ 36659 multiletter control sequences out of 15000+600000
  568195 words of font info for 76 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,8n,79p,694b,1789s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,8n,79p,694b,2034s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on steveGilletHW5.pdf (11 pages, 428531 bytes).
+Output written on steveGilletHW5.pdf (15 pages, 534069 bytes).
 PDF statistics:
- 246 PDF objects out of 1000 (max. 8388607)
- 195 compressed objects within 2 object streams
- 76 named destinations out of 1000 (max. 500000)
- 121 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 295 PDF objects out of 1000 (max. 8388607)
+ 234 compressed objects within 3 object streams
+ 102 named destinations out of 1000 (max. 500000)
+ 146 words of extra memory for PDF output out of 10000 (max. 10000000)
 

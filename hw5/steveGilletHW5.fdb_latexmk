@@ -1,7 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1741283865.03755 "/home/steve0gillet/Desktop/rmc/hw5/steveGilletHW5.tex" "steveGilletHW5.pdf" "steveGilletHW5" 1741283867.11882 0
+["pdflatex"] 1741305103.38553 "/home/steve0gillet/Desktop/rmc/hw5/steveGilletHW5.tex" "steveGilletHW5.pdf" "steveGilletHW5" 1741305104.48181 0
   "/etc/texmf/web2c/texmf.cnf" 1730151749.91005 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/steve0gillet/Desktop/rmc/hw5/steveGilletHW5.tex" 1741283864.45995 12487 19b19cfcc9db9d45096a4f8826226146 ""
+  "/home/steve0gillet/Desktop/rmc/hw5/steveGilletHW5.tex" 1741305102.0095 14129 ad224fc8573e6750cefe195c7387712b ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -113,12 +113,17 @@
   "d4clStep.png" 1741232747.89119 13712 30bbf87a015d523aedb1949c09dff630 ""
   "delta4leadLagPlot.png" 1741230346.5952 43179 7f05900dbd29c453de2d824478d90d2d ""
   "delta4openPlot.png" 1741230393.78338 16234 7e60588e8ee954066962da59bbafe0c9 ""
+  "impulse125.png" 1741305075.06379 13378 54d8df97ca0de50f19559c33d828af2c ""
+  "k125bode.png" 1741303405.02947 27190 d180f896f0ee3071889acc53f594ff8c ""
   "p1diyDiagram.jpg" 1740882390.14503 66356 032fe12132f70e4df559811c2fe05047 ""
   "p1ryDiagram.jpg" 1740882329.22647 46257 33634acbbb8ebdc1169e42cb221ed2af ""
+  "psk100.png" 1741303053.54952 21208 1e29592bd9062c737f48f87c259aa813 ""
+  "psk125.png" 1741303464.52425 21264 86162196db5124913112bd7c58b09e75 ""
   "singularValuePlot.png" 1740890009.62184 21093 2154dacf8560cab4af24521671f935fe ""
-  "steveGilletHW5.aux" 1741283867.02197 1208 2bea1ae3b066995603aa66791827347d "pdflatex"
-  "steveGilletHW5.out" 1741283867.02297 449 2b5d6894026e6841a0db770e7759b370 "pdflatex"
-  "steveGilletHW5.tex" 1741283864.45995 12487 19b19cfcc9db9d45096a4f8826226146 ""
+  "step125.png" 1741305087.31065 15636 dc4f2d243908e1cfb56ba7e313bbe8c7 ""
+  "steveGilletHW5.aux" 1741305104.37547 1208 1e80ed8ce85c751b2b22ef490b4dc0df "pdflatex"
+  "steveGilletHW5.out" 1741305104.37747 449 2b5d6894026e6841a0db770e7759b370 "pdflatex"
+  "steveGilletHW5.tex" 1741305102.0095 14129 ad224fc8573e6750cefe195c7387712b ""
   (generated)
   "steveGilletHW5.aux"
   "steveGilletHW5.log"

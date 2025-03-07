@@ -288,9 +288,64 @@ I think these pretty adequately show the max overshoot as you can see in the fir
 \subsection{}
 \textit{Re-generate the open loop bode plot of $L(s) = P(s)C(s)$ with your new compensator that includes all the constraints so that you can visually verify that your design meets all the original performance requirements listed in the first part of the question.}
 
+I started by generating the PS transfer function and plotting it and getting the $H_{\infty}$ norm and then adjusting the gain as needed.
+I used 'feedback' and 'norm' to get the transfer function and $H_{\infty}$ norm.
+
+\begin{lstlisting}[style=matlabstyle]
+S = feedback(1,openLoop);
+PS = plant*S;
+disp(norm(PS, inf));
+w = logspace(-1,3,1000);
+[mag, ~] = bode(PS,w);
+mag =squeeze(mag);
+figure;
+semilogx(w,mag,'Color', [255/255 140/255 105/255]);
+hold on;
+plot(w, 1/3*ones(size(w)), 'Color', [204/255 51/255 51/255]);
+grid on;
+title('Magnitude of PS at K = 100 [Absolute Units]');
+xlabel('Frequency [rad/s]');
+ylabel('Magnitude [abs]');
+legend('PS', 'Max Gain 1/3');
+hold off;    
+\end{lstlisting}
+
+The resulting $H_{\infty}$ norm was 0.3356 and the gain plot is below:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{psk100.png}
+\end{figure}
+
+So you can see it already just dips above.
+So I played with some gain values and landed on $K = 125$ that achieved the disturbance rejection I want while not changing the system enough that I had to adjust the compensators:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{k125bode.png}
+\end{figure}
+
 \subsection{}
 \textit{Generate a plot of the magnitude of the transfer function $PS(s)$ in absolute units to estimate the maximum $||\phi||_2/||d||_2$ gain and verify that you also satisfy this requirement (you can check this with the norm($PS$, inf)). along with a step and impulse response of $PS(s)$ to visualize the effect of the disturbance on your system.}
 
-% P*S
+The $H_{\infty}$ norm became 0.2153 ('norm' function).
+Here is the magnitude plot:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{psk125.png}
+\end{figure}
+
+And below are the step and impulse response from disturbance to output:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{step125.png}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{impulse125.png}
+\end{figure}
 
 \end{document}
