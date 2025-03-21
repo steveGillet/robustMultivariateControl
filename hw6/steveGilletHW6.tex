@@ -1,0 +1,54 @@
+\documentclass{article}
+\usepackage[margin=1in]{geometry} % For setting page margins
+\usepackage{amsmath}
+\usepackage{amssymb} % For math symbols and equations
+\usepackage{graphicx} % For including images
+\usepackage{hyperref} 
+\usepackage{enumitem}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{caption}
+
+\renewcommand{\thesection}{\arabic{section}.}
+\renewcommand{\thesubsection}{(\alph{subsection})}
+
+\lstdefinestyle{matlabstyle}{
+    language=Matlab,              % Specify the language
+    basicstyle=\ttfamily\footnotesize\color{black}, % Code font
+    keywordstyle=\color{blue}\bfseries, % Keywords in blue
+    stringstyle=\color{orange},    % Strings in green
+    commentstyle=\color{magenta}, % Comments in magenta
+    numbers=left,                 % Line numbers on the left
+    numberstyle=\tiny\color{black},% Line number style
+    stepnumber=1,                 % Line number increment
+    breaklines=true,              % Line breaking
+    frame=single,                 % Border around code
+    backgroundcolor=\color{white},
+    tabsize=4,                    % Tab size
+    showstringspaces=false,       % Don't show spaces in strings
+}
+
+\begin{document}
+
+\title{
+    \begin{tabular}{@{}l@{}}
+        \textbf{Class:} Robust Multivariate Control \\
+        \textbf{Professor:} Dr. Sean Humbert \\
+        \textbf{TAs:} Santosh Chaganti \\
+        \textbf{Student:} Steve Gillet \\
+        \textbf{Date:} \today \\
+        \textbf{Assignment:} Homework 6
+    \end{tabular}
+}
+
+\author{}
+\date{}
+
+\maketitle
+
+\section{}
+
+\textit{For the simple SISO negative feedback system with \(P(s) = \frac{1}{s-1}\) and \(C(s) = \frac{s-1}{s+2}\), show that at least one transfer function from exogenous signals \(r\) and \(d_I\) to the internal signals \(e\), \(u\) and \(y\) is unstable due to the right-half plane pole/zero cancellation of \(s - 1\) in the loop transfer function \(L = PC\).}
+
+\end{document}
