@@ -10,7 +10,7 @@ G = ss(A,B,C,D);
 
 M = 2;
 A = 0.005;
-omegaB = .5;
+omegaB = 1;
 
 W1 = tf([1/M omegaB], [1 omegaB*A]);
 W2 = tf([100 10], [1 100]);
@@ -32,21 +32,21 @@ p = size(C,1);
 Si = minreal(inv(eye(1)+K*G));
 So = minreal(inv(eye(1)+G*K));
 GSi = minreal(G*inv(eye(1)+K*G));
+To = minreal(K*G*inv(eye(1)+K*G));
 
 figure(1); clf;
 sigma(G, 'r', K, 'y', G*K, 'm', {1e-2, 1e2});
 grid on; legend('\sigma(G)','\sigma(K)','\sigma(G*K)'); title('Open Loop Singular Values');
 
 figure(2); clf;
-sigma(So, 'r', inv(W1), 'y', {1e-3, 1e2});
-grid on; legend('\sigma(So)','\sigma(W1)'); title('Closed Loop Singular Values');
+sigma(So, 'm', inv(W1), 'r--', {1e-3, 1e2});
+grid on; legend('\sigma(So)','\sigma(W1)'); title('\sigma(So) vs. |1/W1(jw)|');
 
 figure(3); clf;
-sigma(K*So, 'r', inv(W2), 'y', {1e-3, 1e2});
-grid on; legend('\sigma(KSo)','\sigma(W2)'); title('Closed Loop Singular Values');
+sigma(K*So, 'm', inv(W2), 'r--', {1e-3, 1e2});
+grid on; legend('\sigma(KSo)','\sigma(W2)'); title('\sigma(KSo) vs. |1/W2(jw)|');
 
 figure(4); clf;
-prefilter = dcgain(K);
-step(prefilter*CL); grid on; axis([0 3 0 1.2]);
-hinfnorm(prefilter*CL);
+step(To); grid on;
+hinfnorm(To);
 title('Closed Loop Step Response');
