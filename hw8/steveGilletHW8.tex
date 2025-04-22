@@ -74,9 +74,9 @@ Writing $y_{\Delta}$, $v$, $z$ in terms of $u_{\Delta}$, $w$, $u$:
 
 \begin{align*}
     y_{\Delta} &= u - W_o u_{\Delta} \\
-    z &= W_p(w + G(u - u_{\Delta})) \\
+    z &= W_p(w + G(u - W_o u_{\Delta})) \\
     v &= -y \\
-      &= -w -G(u-u_{\Delta}) \\
+      &= -w -G(u-W_o u_{\Delta}) \\
 \end{align*}
 
 \[
@@ -88,8 +88,8 @@ Writing $y_{\Delta}$, $v$, $z$ in terms of $u_{\Delta}$, $w$, $u$:
 =
 \begin{bmatrix}
     -W_o & 0 & I \\
-    -W_p G & W_p & W_p G \\
-    G & -I & -G
+    -W_p G W_o & W_p & W_p G \\
+    G W_o & -I & -G
 \end{bmatrix}
 \begin{bmatrix}
     u_{\Delta} \\
@@ -101,21 +101,67 @@ Writing $y_{\Delta}$, $v$, $z$ in terms of $u_{\Delta}$, $w$, $u$:
 Closing lower LFT:
 \begin{align*}
     N = F_l(P,K) &= P_{11} + P_{12} K (I - P_{22} K)^{-1} P_{21} \\
-    &= \begin{bmatrix} -W_o & 0 \\ -W_p G & W_p \end{bmatrix} + \begin{bmatrix} I \\ W_p G \end{bmatrix} K (I - G K)^{-1} \begin{bmatrix} G & -I \end{bmatrix} \\
-    &= \begin{bmatrix} -W_o + K (I - G K)^{-1} G & -K (I - G K)^{-1} \\ -W_p G + W_p G K (I - G K)^{-1} G & W_p - W_p G K (I - G K)^{-1} \end{bmatrix} \\
-    &= \begin{bmatrix} -W_o + T_I & -K S_O \\ W_p G S_O & W_p S_O \end{bmatrix} \\
+    &= \begin{bmatrix} -W_o & 0 \\ -W_p G W_o & W_p \end{bmatrix} + \begin{bmatrix} I \\ W_p G \end{bmatrix} K (I + G K)^{-1} \begin{bmatrix} G W_o & -I \end{bmatrix} \\
+    &= \begin{bmatrix} -W_o + K (I + G K)^{-1} G W_o & -K (I + G K)^{-1} \\ -W_p G W_o + W_p G K (I + G K)^{-1} G W_o & W_p - W_p G K (I + G K)^{-1} \end{bmatrix} \\
+    &= \begin{bmatrix} S_I W_o & -K S_O \\ -W_p S_O G W_o & W_p T_O \end{bmatrix} \\
 \end{align*}
 
-The test for robust stability is comes from the $N_{11}$ block so $-W_o + T_I$.
-The test for nominal performance comes from the $N_{22}$ block so $W_p S_O$.
+The test for robust stability is comes from the $N_{11}$ block so $S_I W_o$.
+The test for nominal performance comes from the $N_{22}$ block so $W_p T_O$.
 Need those $H_\infty$ norms to be less than 1.
 
 \subsection{} 
 \textit{Assume a performance weighting function to be $W_p(s) = w_p(s) I$ where $w_p(s) = (s / M + \omega_B^*)/(s + \omega_B^* A)$, with $A = 4$; $M = 10$; $\omega_B^* = 3$. Does the system satisfy this nominal performance criterion you derived in part (b)?}
 
+I created N in Matlab using the weighting functions and state space models including the state space model for the controller included in the hint below and the state space model for the plant provided.
+
+\begin{lstlisting}[style=matlabstyle]
+plantSS = ss(A,B,C,D);
+controllerSS = ss(cA,cB,cC,cD);
+
+Ti = controllerSS*plantSS*inv(eye(size(controllerSS*plantSS)) + controllerSS*plantSS);
+To = plantSS*controllerSS*inv(eye(size(plantSS*controllerSS)) + plantSS*controllerSS);
+So = inv(eye(size(plantSS*controllerSS)) + plantSS*controllerSS);
+Si = inv(eye(size(controllerSS*plantSS)) + controllerSS*plantSS);
+
+s = tf('s');
+Wp = (s/10 + 3)/(s+3*4)*eye(4);
+Wo = (0.02*s+0.05)/(0.02*s/0.4+1)*eye(2);
+
+N = [Si*Wo -K*So; -Wp*So*plantSS*Wo Wp*To];    
+\end{lstlisting}
+
+I then plotted the sigma plots and computed the $H_\infty$ norm for the $N_{22}$ block.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{1performance.png}
+    \label{fig:1performance}
+\end{figure}
+
+The $H_\infty$ norm is 0.8292 which is less than 1 so the system satisfies the nominal performance criterion.
+
 \subsection{} 
 \textit{Assume an uncertainty weighting function to be $W_o(s) = w_o(s) I$ where $w_o(s) = (\tau s + r_0)/(\tau s / r_{\infty} + 1)$, with $\tau = 0.02$, $r_0 = 0.05$, $r_{\infty} = 0.4$, and full (unstructured) uncertainty. Is the system robustly stable using the criterion you derived in part (b)?}
-
 \textit{Hint: to compute the state space model for the controller, assume $D = K$ (static gain) and the $A, B, C$ matrices are all zeros with appropriate dimensions.}
+
+I used the same technique to compute and plot the robust stability for the system using $W_p T_O$ from the $N_{22}$ block for robust stability.
+The $H_\infty$ norm is 0.4679 which is less than 1 so the system satisfies the robust stability criterion.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{1stability.png}
+    \label{fig:1stability}
+\end{figure}
+
+\section{}
+\textit{Consider a model of the longitudinal dynamics of a missile
+\[
+\begin{aligned}
+\frac{d}{d t} \begin{bmatrix} \alpha \\ q \end{bmatrix} &= \begin{bmatrix} Z_\alpha & Z_q \\ M_\alpha & 0 \end{bmatrix} \begin{bmatrix} \alpha \\ q \end{bmatrix} + \begin{bmatrix} Z_{\delta_u} \\ M_{\delta_u} \end{bmatrix} \delta_u \\
+n_z &= \begin{bmatrix} Z_\alpha & 0 \end{bmatrix} \begin{bmatrix} \alpha \\ q \end{bmatrix} + Z_{\delta_u} \delta_u
+\end{aligned}
+\]
+where the states are the angle of attack $\alpha$, the pitch rate $q$, $n_z$ is the output (normal acceleration), $\delta_u$ is the tail deflection input. Assume the following variations in stability derivatives: $M_\alpha = M_\alpha^0 + \delta_\alpha$ and $Z_q = Z_q^0 + \delta_q$. Generate the analytical state space model as discussed in lecture for the extended plant $N$ by "pulling out the deltas" for this case of structured uncertainty. Assume $w = \delta_u$, $z = n_z$ and $\Delta = \operatorname{diag}\{\delta_\alpha, \delta_q\}$.}
 
 \end{document}

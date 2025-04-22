@@ -45,22 +45,36 @@ cD = K;
 plantSS = ss(A,B,C,D);
 controllerSS = ss(cA,cB,cC,cD);
 
-Ti = controllerSS*plantSS*inv(eye(size(plantSS)) + controllerSS*plantSS);
-So = inv(eye(size(plantSS)) + plantSS*controllerSS);
+Ti = controllerSS*plantSS*inv(eye(size(controllerSS*plantSS)) + controllerSS*plantSS);
+To = plantSS*controllerSS*inv(eye(size(plantSS*controllerSS)) + plantSS*controllerSS);
+So = inv(eye(size(plantSS*controllerSS)) + plantSS*controllerSS);
+Si = inv(eye(size(controllerSS*plantSS)) + controllerSS*plantSS);
 
 s = tf('s');
-Wp = (s/10 + 3)/(s+3*4);
-Wo = (0.02*s+0.05)/(0.02*s/0.4+1);
+Wp = (s/10 + 3)/(s+3*4)*eye(4);
+Wo = (0.02*s+0.05)/(0.02*s/0.4+1)*eye(2);
 
-N = [-Wo + Ti; -K*So; Wp*G*So; Wp*So];
-omega = logspae(-3,3);
-muPlotOptions = bodeoptions;
-muPlotOptions.PhaseVisible = 'off';
-muPlotOptions.XLim = [1e-3 1e3];
-muPlotOptions.MagUnits = 'abs';
+% disp(size(Si*Wo));
+% disp(size(-K*So));
+% disp(size(-Wp*So*plantSS*Wo));
+% disp(size(Wp*To));
 
-woTiFRD = frd(-Wo + Ti, omega);
-BlkStruct = [2 2];
-[muWoTiFull] = mussv(woTiFRD, BlkStruct);
-figure;
-bodeplot(muWoTiFull, muPlotOptions);
+N = [Si*Wo -K*So; -Wp*So*plantSS*Wo Wp*To];
+omega = logspace(-3,3);
+sigmaPlotOptions = sigmaoptions;
+sigmaPlotOptions.XLim = [1e-3 1e3];
+sigmaPlotOptions.MagUnits = 'abs';
+
+figure(1); clf;
+sigmaplot(Si*Wo, sigmaPlotOptions);
+title('Robust Stability (Si*Wo) Hinf Norm Test');
+xlabel('Frequency');
+ylabel('Magnitude');
+disp(norm(Si*Wo, inf));
+
+figure(2); clf;
+sigmaplot(Wp*To, sigmaPlotOptions);
+title('Nominal Performance (Wp*To) Hinf Norm Test');
+xlabel('Frequency');
+ylabel('Magnitude');
+disp(norm(Wp*To, inf));
