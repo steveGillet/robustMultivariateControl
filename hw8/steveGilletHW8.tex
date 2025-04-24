@@ -164,4 +164,196 @@ n_z &= \begin{bmatrix} Z_\alpha & 0 \end{bmatrix} \begin{bmatrix} \alpha \\ q \e
 \]
 where the states are the angle of attack $\alpha$, the pitch rate $q$, $n_z$ is the output (normal acceleration), $\delta_u$ is the tail deflection input. Assume the following variations in stability derivatives: $M_\alpha = M_\alpha^0 + \delta_\alpha$ and $Z_q = Z_q^0 + \delta_q$. Generate the analytical state space model as discussed in lecture for the extended plant $N$ by "pulling out the deltas" for this case of structured uncertainty. Assume $w = \delta_u$, $z = n_z$ and $\Delta = \operatorname{diag}\{\delta_\alpha, \delta_q\}$.}
 
+I started with the state space block diagram from the input to the output showing how the different states, dynamics, and uncertainties are related.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{2blockDiagram.png}
+    \label{fig:2blockDiagram}
+    \caption{State Space Block Diagram of Longitudinal Missile Dynamics}
+\end{figure}
+
+Then I "pulled out the deltas" so that those uncertainties can be treated as inputs and outputs.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{2blockDeltaPulled.png}
+    \label{fig:2blockDeltaPulled}
+    \caption{Block Diagram with Deltas Pulled Out}
+\end{figure}
+
+Then I wrote out the state space equations based on what I had done in the block diagrams, starting with including the $u_\Delta$s and $y_\Delta$s as separate inputs and outputs and then stacking them together to get the full anaylitcal state space quation in (d) and (e).
+
+\begin{align*}
+&\text{(a)} \quad
+\begin{bmatrix}
+\dot{\alpha} \\
+\dot{q}
+\end{bmatrix}
+=
+\begin{bmatrix}
+Z_\alpha & Z^0_q \\
+M^0_\alpha & 0
+\end{bmatrix}
+\begin{bmatrix}
+\alpha \\
+q
+\end{bmatrix}
++
+\begin{bmatrix}
+u_{\Delta_q} \\
+u_{\Delta_\alpha}
+\end{bmatrix}
++
+\begin{bmatrix}
+Z_{\delta_u} \\
+M_{\delta_u} 
+\end{bmatrix}
+\delta_u \\
+&\text{(b)} \quad
+y_{\Delta_q} = q, \quad y_{\Delta_\alpha} = \alpha \\
+&\text{(c)} \quad
+n_z =
+\begin{bmatrix}
+Z_\alpha & 0
+\end{bmatrix}
+\begin{bmatrix}
+\alpha \\
+q
+\end{bmatrix}
++ Z_{\delta_u} \delta_u \\
+&\text{(d)} \quad
+\begin{bmatrix}
+\dot{\alpha} \\
+\dot{q}
+\end{bmatrix}
+=
+\begin{bmatrix}
+Z_\alpha & Z_q^0 \\
+M^0_\alpha & 0
+\end{bmatrix}
+\begin{bmatrix}
+\alpha \\
+q
+\end{bmatrix}
++
+\begin{bmatrix}
+1 & 0 & Z_{\delta_u} \\
+0 & 1 & M_{\delta_u}
+\end{bmatrix}
+\begin{bmatrix}
+u_{\Delta_q} \\
+u_{\Delta_\alpha} \\
+\delta_u
+\end{bmatrix} \\
+&\text{(e)} \quad
+\begin{bmatrix}
+Y_{\Delta_\alpha} \\
+Y_{\Delta_q} \\
+n_z
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & 0 \\
+0 & 1 \\
+Z_\alpha & 0
+\end{bmatrix}
+\begin{bmatrix}
+\alpha \\
+q
+\end{bmatrix}
++
+\begin{bmatrix}
+0 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & Z_\delta
+\end{bmatrix}
+\begin{bmatrix}
+u_{\Delta_q} \\
+u_{\Delta_\alpha} \\
+\delta_u
+\end{bmatrix} \\
+&\text{(f)} \quad
+N = (s I - A)^{-1} B \\
+&\quad =
+\begin{bmatrix}
+1 & 0 \\
+0 & 1 \\
+Z\alpha & 0
+\end{bmatrix}
+(s I -
+\begin{bmatrix}
+Z\alpha & Z_q^0 \\
+M_\alpha^0 & 0
+\end{bmatrix})^{-1}
+\begin{bmatrix}
+1 & 0 & Z_{\delta_u} \\
+0 & 1 & M_{\delta_u}
+\end{bmatrix} \\
+&\quad =
+\begin{bmatrix}
+1 & 0 \\
+0 & 1 \\
+Z_\alpha & 0
+\end{bmatrix}
+\begin{bmatrix}
+s - Z_\alpha & s - Z_q^0 \\
+s-M_\alpha^0 & s
+\end{bmatrix}^{-1}
+\begin{bmatrix}
+1 & 0 & Z_{\delta_u} \\
+0 & 1 & M_{\delta_u}
+\end{bmatrix}
+\end{align*}
+
+Then you can see where I wrote out what that Transfer Function would look like from the input to the output with the uncertainties.
+
+\section{}
+
+\textit{Consider the following lateral flight dynamics model for the A-4D aircraft:}
+
+\[
+\frac{d}{d t}
+\begin{bmatrix}
+\beta \\
+r
+\end{bmatrix}
+=
+\begin{bmatrix}
+Y_\beta / u_0 & -\left(1 - Y_r / u_0\right) \\
+N_\beta & N_r
+\end{bmatrix}
+\begin{bmatrix}
+\beta \\
+r
+\end{bmatrix}
++
+\begin{bmatrix}
+0 & Y_{\delta_r} / u_0 \\
+N_{\delta_a} & N_{\delta_r}
+\end{bmatrix}
+\begin{bmatrix}
+\delta_a \\
+\delta_r
+\end{bmatrix}.
+\]
+
+\textit{Assume the sea level reference flight condition (Condition 1) from the attached data sheet, and Mach 1 at sea level is $1126 \, \text{ft/s}$ (use this to compute $u_0$). Build the state space $A$ and $B$ matrices using the regular stability and control derivatives $\left(Y_\beta, N_\beta, N_r, Y_{\delta_r}, N_{\delta_a}, N_{\delta_r}\right)$, not the 'primed' derivatives, and assume $Y_r = 0$. Also assume the $C$ matrix is the identity so that the outputs are the two states $\beta$ and $r$.}
+
+\subsection{}
+
+\textit{Using the nominal plant, synthesize a $H_{\infty}$ controller using hinfsyn with a disturbance rejection performance weighting function $W_p(s) = w_p(s) I$ where $w_p(s) = \left(s / M + \omega_B^*\right) / \left(s + \omega_B^* A\right)$, with $A = 0.005$; $M = 2$; $\omega_B^* = 1$. Does the closed loop system satisfy nominal performance? Verify with a plot of $\partial[S(j \omega)]$ and $1 / \left| w_p(j \omega) \right|$.}
+
+\subsection{}
+
+\textit{Now allow the parameter $Y_\beta$ to have $20\%$ real uncertainty and compute $\mu\left(N_{11}\right)$. Use the MATLAB command mussv and generate the $N$ and $\Delta$ blocks using the commands $1 \mathrm{ft}$ and lftdata as was done in lecture. Does the controller you designed provide robust stability for the perturbation in $Y_\beta$?}
+
+\subsection{}
+
+\textit{Now compute the robust performance test $\mu(N)$ using the appropriate unstructured $\Delta_p$ and structured $\Delta$ blocks as was discussed in lecture. Does the controller you designed provide robust performance for the perturbation in $Y_\beta$?}
+
+\subsection{}
+
+\textit{Now add an additional perturbation of $30\%$ real uncertainty of the parameter $N_\beta$ and check to see if your controller provides robust stability and robust performance for this uncertainty case.}
+
 \end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.10.28)  21 APR 2025 16:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.10.28)  23 APR 2025 21:11
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -406,7 +406,7 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 49.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<1blockDiagram.png, id=28, 1890.06125pt x 573.14125pt>
+<1blockDiagram.png, id=48, 1890.06125pt x 573.14125pt>
 File: 1blockDiagram.png Graphic file (type png)
 <use 1blockDiagram.png>
 Package pdftex.def Info: 1blockDiagram.png  used on input line 65.
@@ -418,38 +418,50 @@ File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <8> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 122.
-<1performance.png, id=47, 429.10312pt x 338.76563pt>
+<1performance.png, id=67, 429.10312pt x 338.76563pt>
 File: 1performance.png Graphic file (type png)
 <use 1performance.png>
 Package pdftex.def Info: 1performance.png  used on input line 138.
 (pdftex.def)             Requested size: 469.75502pt x 370.86514pt.
  [2]
-<1stability.png, id=68, 429.10312pt x 338.76563pt>
+<1stability.png, id=88, 429.10312pt x 338.76563pt>
 File: 1stability.png Graphic file (type png)
 <use 1stability.png>
 Package pdftex.def Info: 1stability.png  used on input line 153.
 (pdftex.def)             Requested size: 469.75502pt x 370.86514pt.
- [3 <./1performance.png (PNG copy)>] [4 <./1stability.png (PNG copy)>] (./steveGilletHW8.aux)
+ [3 <./1performance.png (PNG copy)>]
+<2blockDiagram.png, id=94, 1278.7775pt x 679.53876pt>
+File: 2blockDiagram.png Graphic file (type png)
+<use 2blockDiagram.png>
+Package pdftex.def Info: 2blockDiagram.png  used on input line 171.
+(pdftex.def)             Requested size: 469.75502pt x 249.62122pt.
+ [4 <./1stability.png (PNG copy)>]
+<2blockDeltaPulled.png, id=101, 1245.65375pt x 909.3975pt>
+File: 2blockDeltaPulled.png Graphic file (type png)
+<use 2blockDeltaPulled.png>
+Package pdftex.def Info: 2blockDeltaPulled.png  used on input line 180.
+(pdftex.def)             Requested size: 469.75502pt x 342.95203pt.
+ [5 <./2blockDiagram.png>] [6 <./2blockDeltaPulled.png>] [7] [8] (./steveGilletHW8.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `steveGilletHW8.out' has not changed.
-(rerunfilecheck)             Checksum: 3C8C61D545B589F3305BC61B7A2BF6C6;266.
+(rerunfilecheck)             Checksum: 193636548C2416F6FA467521A07A272C;499.
  ) 
 Here is how much of TeX's memory you used:
- 14477 strings out of 474222
- 219798 string characters out of 5748732
+ 14512 strings out of 474222
+ 220431 string characters out of 5748732
  2073975 words of memory out of 5000000
- 36555 multiletter control sequences out of 15000+600000
- 567860 words of font info for 75 fonts, out of 8000000 for 9000
+ 36578 multiletter control sequences out of 15000+600000
+ 568558 words of font info for 77 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,14n,79p,633b,1789s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,15n,79p,633b,1789s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
-Output written on steveGilletHW8.pdf (4 pages, 239186 bytes).
+Output written on steveGilletHW8.pdf (8 pages, 367148 bytes).
 PDF statistics:
- 143 PDF objects out of 1000 (max. 8388607)
- 105 compressed objects within 2 object streams
- 28 named destinations out of 1000 (max. 500000)
- 64 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 191 PDF objects out of 1000 (max. 8388607)
+ 145 compressed objects within 2 object streams
+ 39 named destinations out of 1000 (max. 500000)
+ 114 words of extra memory for PDF output out of 10000 (max. 10000000)
 
