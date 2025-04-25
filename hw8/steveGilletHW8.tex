@@ -38,7 +38,7 @@
         \textbf{TAs:} Santosh Chaganti \\
         \textbf{Student:} Steve Gillet \\
         \textbf{Date:} \today \\
-        \textbf{Assignment:} Homework 7
+        \textbf{Assignment:} Homework 8
     \end{tabular}
 }
 
@@ -344,16 +344,161 @@ N_{\delta_a} & N_{\delta_r}
 
 \textit{Using the nominal plant, synthesize a $H_{\infty}$ controller using hinfsyn with a disturbance rejection performance weighting function $W_p(s) = w_p(s) I$ where $w_p(s) = \left(s / M + \omega_B^*\right) / \left(s + \omega_B^* A\right)$, with $A = 0.005$; $M = 2$; $\omega_B^* = 1$. Does the closed loop system satisfy nominal performance? Verify with a plot of $\partial[S(j \omega)]$ and $1 / \left| w_p(j \omega) \right|$.}
 
+I generated the $H_\infty$ controller using sysic and hinfsyn as shown in the code below:
+
+\begin{lstlisting}[style=matlabstyle]
+Ybeta = -110.94;
+u0 = 1126*0.4;
+Yr = 0;
+Nbeta = 15.16;
+Nr = -0.639;
+Ydeltar = 19.65;
+Ndeltaa = 0.334;
+Ndeltar = -6.732;
+
+A = [Ybeta/u0 -(1-Yr/u0); Nbeta Nr];
+B = [0 Ydeltar/u0; Ndeltaa Ndeltar];
+C = eye(size(B,1));
+D = 0;
+
+G = ss(A,B,C,D);
+
+M = 2;
+Aweight = 0.005;
+omegaB = 1;
+
+s = tf('s');
+Wp = tf([s/M+omegaB], [s+omegaB*Aweight])*eye(size(C,1));
+
+systemnames = 'G Wp';
+inputvar = '[u(2); w(2)]';
+outputvar = '[Wp; -G-w]';
+input_to_G = '[u]';
+input_to_Wp = '[G+w]';
+sysoutname = 'P';
+sysic;
+Pnominal = minreal(ss(P));
+
+m = size(B,2);
+p = size(C,1);
+[K, CL, gamma, info] = hinfsyn(Pnominal,p,m,'method','ric','Tolgam',1e-3,'DISPLAY','on');
+
+So = inv(eye(2)+G*K);
+figure(1); clf;
+sigma(So, 'm', inv(Wp), 'r--', {1e-3, 1e2});
+grid on; legend('\sigma(So)','\sigma(1/Wp)'); title('\sigma(So) vs. |1/Wp(jw)|');    
+\end{lstlisting}
+
+Here is the plot of 'sigma' of So (the disturbance rejection transfer function) and $\frac{1}{w_p}$ (the weighting function).
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{3np.png}
+    \label{fig:3np}
+    \caption{Nominal Performance Plot}
+\end{figure}
+
+The max singular value is not less than the weighting function for all frequencies so I don't think it does satisfy nominal performance, leading me to suspect some misstep in the process.
+
 \subsection{}
 
 \textit{Now allow the parameter $Y_\beta$ to have $20\%$ real uncertainty and compute $\mu\left(N_{11}\right)$. Use the MATLAB command mussv and generate the $N$ and $\Delta$ blocks using the commands $1 \mathrm{ft}$ and lftdata as was done in lecture. Does the controller you designed provide robust stability for the perturbation in $Y_\beta$?}
+
+I generated the uncertain $Y_\beta$ using the 'ureal' function and then 'lft' and 'lftdata' to generate N and $\Delta$ then grabbed $N_{11}$ to test robust stability.
+
+\begin{lstlisting}
+Ybeta = ureal('Ybeta', Ybeta, 'Percentage', 20);
+
+...
+
+CL = lft(P,K);
+[N, Delta, Blkstruct] = lftdata(CL);
+szDelta = size(Delta);
+N11 = N(1:szDelta(2), 1:szDelta(1));
+
+omega = logspace(-3,2);
+N11frd = frd(N11, omega);
+mu = mussv(N11frd, Blkstruct);
+
+bodeOpt = bodeoptions;
+bodeOpt.PhaseVisible = 'off';
+bodeOpt.XLim = [1e-1 1e1];
+bodeOpt.MagUnits = 'abs';
+figure(2); clf;
+bodeplot(mu(1,1), 'bo', mu(1,2), 'r-', bodeOpt);
+grid on;
+xlabel('Frequency (rad/s)');
+ylabel('Mu(N11) Upper and Lower Bounds');
+title('Robust Stability Plot');    
+\end{lstlisting}
+
+Then I used mussv and bodeplot to plot the upper and lower bounds of the $\mu(N_{11})$ function.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{3rs.png}
+    \label{fig:3rs}
+    \caption{Robust Stability Plot}
+\end{figure}
+
+The controller does appear to satisfy robust stability by being less than 1 for all frequencies.
 
 \subsection{}
 
 \textit{Now compute the robust performance test $\mu(N)$ using the appropriate unstructured $\Delta_p$ and structured $\Delta$ blocks as was discussed in lecture. Does the controller you designed provide robust performance for the perturbation in $Y_\beta$?}
 
+For Robust Performance, I used a similar process except with all of N and a structured and unstructed uncertainty block structure.
+
+\begin{lstlisting}[style=matlabstyle]
+Nfrd = frd(N, omega);
+Blkstruct = [1 0; 2 2];
+muN = mussv(Nfrd, Blkstruct);
+figure(3); clf;
+bodeplot(muN(1,1), 'bo', muN(1,2), 'r-', bodeOpt);
+grid on;
+xlabel('Frequency (rad/s)');
+ylabel('Mu(N) Upper and Lower Bounds');
+title('Robust Performance Plot');    
+\end{lstlisting}
+
+Here is the plot:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{3rp.png}
+    \label{fig:3rp}
+    \caption{Robust Performance Plot}
+\end{figure}
+
+Robust performance appears to be satisfied since the bounds remain below 1 for all frequencies.
+
 \subsection{}
 
 \textit{Now add an additional perturbation of $30\%$ real uncertainty of the parameter $N_\beta$ and check to see if your controller provides robust stability and robust performance for this uncertainty case.}
+
+Lastly I added uncertainty to $N_\beta$ using the same process as for $Y_\beta$ and then generated all of the plots again.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{3nbnp.png}
+    \label{fig:3nbnp}
+    \caption{Nominal Performance Plot}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{3nbrs.png}
+    \label{fig:3nbrs}
+    \caption{Robust Stability Plot}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{3nbrp.png}
+    \label{fig:3nbrp}
+    \caption{Robust Performance Plot}
+\end{figure}
+
+Again all of the tests appear to be satisfied except for nominal performance, which implies that none of them are actually satisfied.
 
 \end{document}
