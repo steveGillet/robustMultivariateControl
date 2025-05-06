@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.10.28)  5 MAY 2025 22:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.10.28)  6 MAY 2025 16:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -418,7 +418,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 56--57
 [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}] [3]
-<blockDiagram.png, id=92, 1885.0425pt x 602.25pt>
+<blockDiagram.png, id=96, 1885.0425pt x 602.25pt>
 File: blockDiagram.png Graphic file (type png)
 <use blockDiagram.png>
 Package pdftex.def Info: blockDiagram.png  used on input line 263.
@@ -428,72 +428,159 @@ File: lstlang1.sty 2023/02/27 1.9 listings language file
 )
 LaTeX Font Info:    Font shape `OT1/cmtt/bx/n' in size <8> not available
 (Font)              Font shape `OT1/cmtt/m/n' tried instead on input line 296.
-<sigmaG.png, id=110, 421.575pt x 316.18124pt>
+<sigmaG.png, id=114, 421.575pt x 316.18124pt>
 File: sigmaG.png Graphic file (type png)
 <use sigmaG.png>
 Package pdftex.def Info: sigmaG.png  used on input line 313.
 (pdftex.def)             Requested size: 375.80544pt x 281.85875pt.
-<sigmaGK.png, id=111, 421.575pt x 316.18124pt>
+<sigmaGK.png, id=115, 421.575pt x 316.18124pt>
 File: sigmaGK.png Graphic file (type png)
 <use sigmaGK.png>
 Package pdftex.def Info: sigmaGK.png  used on input line 320.
 (pdftex.def)             Requested size: 375.80544pt x 281.85875pt.
-<sigmaSo.png, id=112, 421.575pt x 316.18124pt>
+<sigmaSo.png, id=116, 421.575pt x 316.18124pt>
 File: sigmaSo.png Graphic file (type png)
 <use sigmaSo.png>
 Package pdftex.def Info: sigmaSo.png  used on input line 327.
 (pdftex.def)             Requested size: 375.80544pt x 281.85875pt.
-<sigmaTo.png, id=113, 421.575pt x 316.18124pt>
+<sigmaTo.png, id=117, 421.575pt x 316.18124pt>
 File: sigmaTo.png Graphic file (type png)
 <use sigmaTo.png>
 Package pdftex.def Info: sigmaTo.png  used on input line 334.
 (pdftex.def)             Requested size: 375.80544pt x 281.85875pt.
-<sigmaWp.png, id=114, 421.575pt x 316.18124pt>
+<sigmaWp.png, id=118, 421.575pt x 316.18124pt>
 File: sigmaWp.png Graphic file (type png)
 <use sigmaWp.png>
 Package pdftex.def Info: sigmaWp.png  used on input line 341.
 (pdftex.def)             Requested size: 375.80544pt x 281.85875pt.
-<stepTheta.png, id=115, 421.575pt x 316.18124pt>
+<stepTheta.png, id=119, 421.575pt x 316.18124pt>
 File: stepTheta.png Graphic file (type png)
 <use stepTheta.png>
 Package pdftex.def Info: stepTheta.png  used on input line 350.
 (pdftex.def)             Requested size: 375.80544pt x 281.85875pt.
-<stepPsi.png, id=116, 429.10312pt x 338.76563pt>
+<stepPsi.png, id=120, 429.10312pt x 338.76563pt>
 File: stepPsi.png Graphic file (type png)
 <use stepPsi.png>
 Package pdftex.def Info: stepPsi.png  used on input line 357.
 (pdftex.def)             Requested size: 375.80544pt x 296.69315pt.
-<stepDtheta.png, id=117, 429.10312pt x 338.76563pt>
+<stepDtheta.png, id=121, 429.10312pt x 338.76563pt>
 File: stepDtheta.png Graphic file (type png)
 <use stepDtheta.png>
 Package pdftex.def Info: stepDtheta.png  used on input line 364.
 (pdftex.def)             Requested size: 375.80544pt x 296.69315pt.
-<stepDpsi.png, id=118, 429.10312pt x 338.76563pt>
+<stepDpsi.png, id=122, 429.10312pt x 338.76563pt>
 File: stepDpsi.png Graphic file (type png)
 <use stepDpsi.png>
 Package pdftex.def Info: stepDpsi.png  used on input line 371.
 (pdftex.def)             Requested size: 375.80544pt x 296.69315pt.
- [5 <./blockDiagram.png>] [6 <./sigmaG.png (PNG copy)> <./sigmaGK.png (PNG copy)>] [7 <./sigmaSo.png (PNG copy)> <./sigmaTo.png (PNG copy)>] [8 <./sigmaWp.png (PNG copy)> <./stepTheta.png (PNG copy)>] [9 <./stepPsi.png (PNG copy)> <./stepDtheta.png (PNG copy)>] [10 <./stepDpsi.png (PNG copy)>] (./steveGilletFinalProject.aux)
+ [5 <./blockDiagram.png>] [6 <./sigmaG.png (PNG copy)> <./sigmaGK.png (PNG copy)>] [7 <./sigmaSo.png (PNG copy)> <./sigmaTo.png (PNG copy)>] [8 <./sigmaWp.png (PNG copy)> <./stepTheta.png (PNG copy)>] [9 <./stepPsi.png (PNG copy)> <./stepDtheta.png (PNG copy)>] [10 <./stepDpsi.png (PNG copy)>]
+<robustStabilityPlot.png, id=198, 421.575pt x 316.18124pt>
+File: robustStabilityPlot.png Graphic file (type png)
+<use robustStabilityPlot.png>
+Package pdftex.def Info: robustStabilityPlot.png  used on input line 435.
+(pdftex.def)             Requested size: 375.80544pt x 281.85875pt.
+<robustPerformancePlot.png, id=199, 429.10312pt x 338.76563pt>
+File: robustPerformancePlot.png Graphic file (type png)
+<use robustPerformancePlot.png>
+Package pdftex.def Info: robustPerformancePlot.png  used on input line 442.
+(pdftex.def)             Requested size: 375.80544pt x 296.69315pt.
+ [11 <./robustStabilityPlot.png (PNG copy)>]
+<robustStabilityPlotOmPointOhOne.png, id=236, 421.575pt x 316.18124pt>
+File: robustStabilityPlotOmPointOhOne.png Graphic file (type png)
+<use robustStabilityPlotOmPointOhOne.png>
+Package pdftex.def Info: robustStabilityPlotOmPointOhOne.png  used on input line 452.
+(pdftex.def)             Requested size: 375.80544pt x 281.85875pt.
+ [12 <./robustPerformancePlot.png (PNG copy)>]
+<robustPerformancePlotOmPointOhOne.png, id=242, 429.10312pt x 338.76563pt>
+File: robustPerformancePlotOmPointOhOne.png Graphic file (type png)
+<use robustPerformancePlotOmPointOhOne.png>
+Package pdftex.def Info: robustPerformancePlotOmPointOhOne.png  used on input line 459.
+(pdftex.def)             Requested size: 375.80544pt x 296.69315pt.
+ [13 <./robustStabilityPlotOmPointOhOne.png (PNG copy)> <./robustPerformancePlotOmPointOhOne.png (PNG copy)>]
+<stepThetaRP.png, id=250, 429.10312pt x 338.76563pt>
+File: stepThetaRP.png Graphic file (type png)
+<use stepThetaRP.png>
+Package pdftex.def Info: stepThetaRP.png  used on input line 470.
+(pdftex.def)             Requested size: 375.80544pt x 296.69315pt.
+<stepPsiRP.png, id=251, 429.10312pt x 338.76563pt>
+File: stepPsiRP.png Graphic file (type png)
+<use stepPsiRP.png>
+Package pdftex.def Info: stepPsiRP.png  used on input line 477.
+(pdftex.def)             Requested size: 375.80544pt x 296.69315pt.
+ [14 <./stepThetaRP.png (PNG copy)>]
+<stepDthetaRP.png, id=257, 429.10312pt x 338.76563pt>
+File: stepDthetaRP.png Graphic file (type png)
+<use stepDthetaRP.png>
+Package pdftex.def Info: stepDthetaRP.png  used on input line 484.
+(pdftex.def)             Requested size: 375.80544pt x 296.69315pt.
+ [15 <./stepPsiRP.png (PNG copy)>]
+<stepDpsiRP.png, id=263, 429.10312pt x 338.76563pt>
+File: stepDpsiRP.png Graphic file (type png)
+<use stepDpsiRP.png>
+Package pdftex.def Info: stepDpsiRP.png  used on input line 491.
+(pdftex.def)             Requested size: 375.80544pt x 296.69315pt.
+ [16 <./stepDthetaRP.png (PNG copy)>]
+<rpDK.png, id=269, 421.575pt x 316.18124pt>
+File: rpDK.png Graphic file (type png)
+<use rpDK.png>
+Package pdftex.def Info: rpDK.png  used on input line 518.
+(pdftex.def)             Requested size: 375.80544pt x 281.85875pt.
+ [17 <./stepDpsiRP.png (PNG copy)>]
+<dkOLsv.png, id=284, 421.575pt x 316.18124pt>
+File: dkOLsv.png Graphic file (type png)
+<use dkOLsv.png>
+Package pdftex.def Info: dkOLsv.png  used on input line 525.
+(pdftex.def)             Requested size: 375.80544pt x 281.85875pt.
+<dkCLsv.png, id=285, 429.10312pt x 338.76563pt>
+File: dkCLsv.png Graphic file (type png)
+<use dkCLsv.png>
+Package pdftex.def Info: dkCLsv.png  used on input line 532.
+(pdftex.def)             Requested size: 375.80544pt x 296.69315pt.
+ [18 <./rpDK.png (PNG copy)> <./dkOLsv.png (PNG copy)>]
+<stepThetaDK.png, id=292, 429.10312pt x 338.76563pt>
+File: stepThetaDK.png Graphic file (type png)
+<use stepThetaDK.png>
+Package pdftex.def Info: stepThetaDK.png  used on input line 539.
+(pdftex.def)             Requested size: 375.80544pt x 296.69315pt.
+ [19 <./dkCLsv.png (PNG copy)>]
+<stepPsiDK.png, id=299, 429.10312pt x 338.76563pt>
+File: stepPsiDK.png Graphic file (type png)
+<use stepPsiDK.png>
+Package pdftex.def Info: stepPsiDK.png  used on input line 546.
+(pdftex.def)             Requested size: 375.80544pt x 296.69315pt.
+ [20 <./stepThetaDK.png (PNG copy)>]
+<stepDthetaDK.png, id=305, 429.10312pt x 338.76563pt>
+File: stepDthetaDK.png Graphic file (type png)
+<use stepDthetaDK.png>
+Package pdftex.def Info: stepDthetaDK.png  used on input line 553.
+(pdftex.def)             Requested size: 375.80544pt x 296.69315pt.
+ [21 <./stepPsiDK.png (PNG copy)>]
+<stepDpsiDK.png, id=311, 429.10312pt x 338.76563pt>
+File: stepDpsiDK.png Graphic file (type png)
+<use stepDpsiDK.png>
+Package pdftex.def Info: stepDpsiDK.png  used on input line 560.
+(pdftex.def)             Requested size: 375.80544pt x 296.69315pt.
+ [22 <./stepDthetaDK.png (PNG copy)>] [23 <./stepDpsiDK.png (PNG copy)>] (./steveGilletFinalProject.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
 Package rerunfilecheck Info: File `steveGilletFinalProject.out' has not changed.
-(rerunfilecheck)             Checksum: A1FC9688DBB4127209016848E42BDFAD;1620.
+(rerunfilecheck)             Checksum: 055084164CC2FBE1842970E8AB614C7F;1656.
  ) 
 Here is how much of TeX's memory you used:
- 14604 strings out of 474222
- 221898 string characters out of 5748732
- 2093975 words of memory out of 5000000
- 36624 multiletter control sequences out of 15000+600000
+ 14841 strings out of 474222
+ 226265 string characters out of 5748732
+ 2099975 words of memory out of 5000000
+ 36778 multiletter control sequences out of 15000+600000
  569201 words of font info for 79 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,8n,79p,1258b,1792s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,8n,79p,1258b,2040s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on steveGilletFinalProject.pdf (10 pages, 405682 bytes).
+Output written on steveGilletFinalProject.pdf (23 pages, 668030 bytes).
 PDF statistics:
- 268 PDF objects out of 1000 (max. 8388607)
- 210 compressed objects within 3 object streams
- 82 named destinations out of 1000 (max. 500000)
- 139 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 427 PDF objects out of 1000 (max. 8388607)
+ 340 compressed objects within 4 object streams
+ 165 named destinations out of 1000 (max. 500000)
+ 222 words of extra memory for PDF output out of 10000 (max. 10000000)
 

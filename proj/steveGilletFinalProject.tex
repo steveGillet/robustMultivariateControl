@@ -378,5 +378,193 @@ The closed loop bandwidth is about 90 rad/s, the tracking error is 6\% up to 6.2
 \section{}
 \textit{Update the generalized plant to include a diagonal structured complex uncertainty with a relative weight of $w_i(s) = \frac{s + 0.2}{0.5 s + 1}$ in each channel. Assume $\|\Delta\|_{\infty} \leq 1$, and compute the upper and lower bounds on the structured singular value for the controller obtained above, and determine the margins $\left(1 / \mu_{\text{peak}}\right)$ on robust stability and robust performance. Provide an iteration on the performance weighting function to obtain improved margins. Note that if you are using only $\theta$, $\phi$, and $r_{fb}$ as outputs, I don't expect you to achieve robust performance for the given uncertainty profiles, but rather use these tools to assess how much uncertainty your design can tolerate. Again provide plots of step responses in $\theta$ and $\phi$ and the disturbance channels and comment on the performance of your design.}
 
+I used the following code to update the generalized plant with the input uncertainty.
+
+\begin{lstlisting}[style=matlabstyle]
+Wi = (s+0.2)/(0.5*s+1)*eye(nIn);
+
+systemnames = 'G Wp Wi';
+inputvar = '[ydel(2); w(2); u(2)]';
+outputvar = '[Wi; Wp; -G-w]';
+input_to_G = '[u + ydel]';
+input_to_Wp = '[G+w]';
+input_to_Wi = '[u]';
+sysoutname = 'P';
+sysic;
+P = minreal(ss(P));
+
+
+[K, CL, gamma, info] = hinfsyn(P,nOut,nIn,'method','ric','Tolgam',1e-3,'DISPLAY','on');
+
+omega = logspace(-3,3);
+blk = [1 0; 1 0];
+
+N = frd(lft(P,K),omega);
+[muRS, infoRS] = mussv(N(1:2,1:2), blk);
+
+bodeOptions = bodeoptions;
+bodeOptions.PhaseVisible = 'off';
+bodeOptions.XLim = [1e-3 1e3];
+bodeOptions.MagUnits = 'abs';
+
+figure(11);
+bodeplot(muRS, bodeOptions);
+hold on; grid on;
+title('Robust Stability Plot');
+
+blk = [1 0; 1 0; 2 2];
+[muRP, infoRP] = mussv(N, blk);
+figure(12);
+bodeplot(muRP, bodeOptions);
+hold on; grid on;
+title('Robust Performance Plot');
+
+muRSpeak = max(sigma(muRS));
+disp('Robust Stability Margin:');
+disp(1/muRSpeak);
+
+muRPpeak = max(sigma(muRP));
+disp('Robust Performance Margin:');
+disp(1/muRPpeak);
+\end{lstlisting}
+
+Then I plotted the structured singular values and computed the margins for robust stability and performance.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{robustStabilityPlot.png}
+    \caption{Robust stability plot.}
+    \label{fig:robustStabilityPlot}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{robustPerformancePlot.png}
+    \caption{Robust performance plot.}
+    \label{fig:robustPerformancePlot}
+\end{figure}
+
+The robust stability margin is 0.2564 and the robust performance margin is 0.2431.
+I then decreased the $\omega_B$ of the weighting function to 0.01 to push down on the closed loop bandwidth.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{robustStabilityPlotOmPointOhOne.png}
+    \caption{Robust stability plot.}
+    \label{fig:robustStabilityPlotOmPointOhOne}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{robustPerformancePlotOmPointOhOne.png}
+    \caption{Robust performance plot.}
+    \label{fig:robustPerformancePlotOmPointOhOne}
+\end{figure}
+
+That put the robust stability margin at 0.4230 and robust performance at 0.4034
+
+Then I plotted the same step responses as before in the reference input and disturbance inputs.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{stepThetaRP.png}
+    \caption{Step response for theta with uncertainty controller.}
+    \label{fig:stepThetaRP}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{stepPsiRP.png}
+    \caption{Step response for psi with uncertainty controller.}
+    \label{fig:stepPsiRP}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{stepDthetaRP.png}
+    \caption{Step response for theta disturbance with uncertainty controller.}
+    \label{fig:stepDthetaRP}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{stepDpsiRP.png}
+    \caption{Step response for psi disturbance with uncertainty controller.}
+    \label{fig:stepDpsiRP}
+\end{figure}
+
+And you can see the decreased performance.
+The settling time is more like 2 seconds and there is some overshoot now.
+
+\section{}
+\textit{Use D-K iteration to redesign your controller to achieve improved robust performance. Re-generate all the appropriate plots and comment on your final design, in particular the tradeoff between high bandwidth and robust performance in the presence of uncertainty.}
+
+I did the D-K iteration using the 'musyn' function in Matlab.
+
+\begin{lstlisting}[style=matlabstyle]
+Delta = [ultidyn('D_1', [1 1]) 0 ; 0 ultidyn('D_2', [1 1])];
+Punc = lft(Delta,P);
+[Kauto,clp,dkinfo] = musyn(Punc, nOut, nIn);
+
+N = frd(lft(P,Kauto), omega);
+[muAuto, infoAuto] = mussv(N, blk);
+muRP = norm(muAuto(1,1),inf,1e-6);    
+\end{lstlisting}
+
+The robust performance margin was 0.5126 and I generated the plots for the open and closed loop singular values as well as the step responses again.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{rpDK.png}
+    \caption{Robust performance plot with D-K iteration.}
+    \label{fig:rpDK}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{dkOLsv.png}
+    \caption{Open Loop D-K iteration singular values.}
+    \label{fig:dkOLsv}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{dkCLsv.png}
+    \caption{Closed Loop D-K iteration singular values.}
+    \label{fig:dkCLsv}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{stepThetaDK.png}
+    \caption{Step response for theta with D-K iteration.}
+    \label{fig:stepThetaDK}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{stepPsiDK.png}
+    \caption{Step response for psi with D-K iteration.}
+    \label{fig:stepPsiDK}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{stepDthetaDK.png}
+    \caption{Step response for theta disturbance with D-K iteration.}
+    \label{fig:stepDthetaDK}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{stepDpsiDK.png}
+    \caption{Step response for psi disturbance with D-K iteration.}
+    \label{fig:stepDpsiDK}
+\end{figure}
+
+You can see the performance is about the same with improved stability margins.
+The settling time is about 2 seconds and there is 10\% overshoot.
+A mild improvement over the first controller in terms of performance.
+I mentioned it with the weighting function iteration but there appears to be a direct tradeoff between bandwidth and performance.
 
 \end{document}
