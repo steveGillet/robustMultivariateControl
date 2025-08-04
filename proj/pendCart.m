@@ -1,10 +1,12 @@
 % Parameters for the 2-wheeled self-balancing robot with differential drive
-M = 1.5;        % Body mass (kg)
-m = 0.3;        % Total wheel mass (kg)
-l = 0.15;       % Distance from wheel axle to center of mass (m)
-R = 0.075;      % Wheel radius (m)
-d = 0.15;       % Wheel separation (m)
-I_psi = 0.0141; % Moment of inertia about vertical axis (kg·m^2)
+M = 1.31;        % Body mass (kg)
+m = 0.032;        % Total wheel mass (kg)
+l = 0.047625;       % Distance from wheel axle to center of mass (m)
+R = 0.04524375;      % Wheel radius (m)
+d = 0.2016125;       % Wheel separation (m)
+lb = 0.0714375;   % Body length (m) 2 13/16
+wb = 0.15875;   % Body width (m) 6 1/4
+I_psi = 1/12*M*(lb^2+wb^2) + 1/4*m*R^2+m*(d/2)^2; % Moment of inertia about vertical axis (kg·m^2)
 g = 9.81;       % Gravitational acceleration (m/s^2)
 
 % State-space matrices
