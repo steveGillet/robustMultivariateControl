@@ -331,3 +331,10 @@ subplot(2,2,1), step(G(1,1), To(1,1)); grid on;
 subplot(2,2,2), step(G(2,2), To(2,2)); grid on;
 subplot(2,2,3), step(So(1,1));
 subplot(2,2,4), step(So(2,2));
+
+KA = Kauto.A;
+KB = Kauto.B;
+KC = Kauto.C;
+KD = Kauto.D;
+
+save('controller.mat', 'KA', 'KB', 'KC', 'KD');
