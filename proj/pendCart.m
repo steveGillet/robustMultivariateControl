@@ -338,3 +338,56 @@ KC = Kauto.C;
 KD = Kauto.D;
 
 save('controller.mat', 'KA', 'KB', 'KC', 'KD');
+
+K_ss = Kauto;
+
+% Plant
+G_ss = G;
+
+% Extract matrices
+Ak = K_ss.A;
+Bk = K_ss.B;
+Ck = K_ss.C;
+Dk = K_ss.D;
+Ap = G_ss.A;
+Bp = G_ss.B;
+Cp = G_ss.C;
+Dp = G_ss.D;
+
+% Augmented closed-loop matrices (negative feedback, r=0)
+Acl = [Ap - Bp*Dk*Cp, Bp*Ck; -Bk*Cp, Ak];
+Ccl_y = [Cp, zeros(2, size(Ak, 2))];
+Ccl_u = [-Dk*Cp, Ck];  % u = -Dk*y + Ck*x_k (since r=0)
+Ccl = [Ccl_y; Ccl_u];
+Bcl = zeros(size(Acl, 1), 2);  % No reference input
+Dcl = zeros(4, 2);
+
+CL_full = ss(Acl, Bcl, Ccl, Dcl);
+
+% Simulate (initial tilt of 0.1 rad, no reference)
+t = 0:0.01:2;  % 2 seconds
+x0_plant = [0.2; 0; 0; 0; 0];  % Initial state: theta=0.1 rad
+x0_ctrl = zeros(size(Ak, 1), 1);  % Controller starts at 0
+x0_full = [x0_plant; x0_ctrl];
+[y_full, t_full, x_full] = lsim(CL_full, zeros(length(t), 2), t, x0_full);
+
+% Extract u (control inputs)
+u_sim = y_full(:, 3:4);  % Columns 3-4 are u1 (tilt), u2 (yaw)
+
+% Plot u
+figure;
+plot(t, u_sim(:,1), 'b', t, u_sim(:,2), 'r');
+title('Control Inputs u for Initial Tilt');
+xlabel('Time (s)');
+ylabel('u');
+legend('u1 (tilt)', 'u2 (yaw)');
+grid on;
+
+% Compute max absolute u
+max_u_abs = max(abs(u_sim), [], 1);
+disp('Max |u1| (tilt control):');
+disp(max_u_abs(1));
+disp('Max |u2| (yaw control):');
+disp(max_u_abs(2));
+disp('Suggested max_u for Python scaling:');
+disp(max(max_u_abs) * 1.5);  % With 50% headroom for safety
